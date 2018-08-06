@@ -48,10 +48,10 @@ class MonolithEventStore implements EventStore {
             $this->store($stream->id(), $stream->event(), $stream->version());
         });
 
-        // queue event dispatch
-
-        $job = new DispatchDomainEvents($events->toDomainEvents());
-        dispatch($job->onQueue('event_dispatch'));
+        // event dispatch
+        $events->each(function (StreamEvent $stream) {
+            $this->eventDispatcher->dispatch($stream->event());
+        });
     }
 
     /**
