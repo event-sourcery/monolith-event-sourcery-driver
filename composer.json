@@ -1,0 +1,38 @@
+{
+  "name": "event-sourcery/monolith-event-sourcery-driver",
+  "description": "Monolith Driver for a Minimalistic PHP Event Sourcing / CQRS Library with GDPR Support.",
+  "keywords": [
+    "event sourcing",
+    "cqrs",
+    "monolith",
+    "event sourcery",
+    "gdpr"
+  ],
+  "authors": [
+    {
+      "name": "Shawn McCool",
+      "email": "shawn@heybigname.com",
+      "homepage": "http://shawnmc.cool/"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "event-sourcery/event-sourcery": "dev-master",
+    "monolith-php/configuration": "dev-master",
+    "psr/container": "1.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "EventSourcery\\Monolith\\": "src/"
+    },
+    "psr-4": {
+      "Monolith\\": "src/Monolith"
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "bin-dir": "bin"
+  },
+  "license": "MIT"
+}
