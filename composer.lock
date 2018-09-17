@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6054a1ff90ae47c2541a378a49e09c0e",
+    "content-hash": "2b56ab767a9c73a5d141115f8e4bbac8",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -63,7 +63,7 @@
         },
         {
             "name": "event-sourcery/event-sourcery",
-            "version": "dev-master",
+            "version": "3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/event-sourcery/event-sourcery.git",
@@ -1385,9 +1385,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "event-sourcery/event-sourcery": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
