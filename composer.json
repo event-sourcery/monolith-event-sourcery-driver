@@ -22,7 +22,7 @@
   },
   "autoload": {
     "psr-4": {
-      "MonolithEventSourceryDriver\\": "src/"
+      "EventSourcery\\Monolith\\": "src/"
     }
   },
   "config": {
