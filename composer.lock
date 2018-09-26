@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b56ab767a9c73a5d141115f8e4bbac8",
+    "content-hash": "8712cd6cde617a78ea99e9b967dad767",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -63,16 +63,16 @@
         },
         {
             "name": "event-sourcery/event-sourcery",
-            "version": "3.0.6",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/event-sourcery/event-sourcery.git",
-                "reference": "9cd54c3ef27dc37cb9de08005d6c60727ab0f264"
+                "reference": "8cd0f3b6e7e06765f2e6c9422ef2605fd94b1ee2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/9cd54c3ef27dc37cb9de08005d6c60727ab0f264",
-                "reference": "9cd54c3ef27dc37cb9de08005d6c60727ab0f264",
+                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/8cd0f3b6e7e06765f2e6c9422ef2605fd94b1ee2",
+                "reference": "8cd0f3b6e7e06765f2e6c9422ef2605fd94b1ee2",
                 "shasum": ""
             },
             "require": {
@@ -107,7 +107,134 @@
                 "gdpr",
                 "reactive"
             ],
-            "time": "2018-07-26T10:12:32+00:00"
+            "time": "2018-09-18T10:58:41+00:00"
+        },
+        {
+            "name": "monolith/collections",
+            "version": "2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/monolith-php/collections.git",
+                "reference": "c9108757cc498eb4eb2e33e4a920dca4c724e758"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/monolith-php/collections/zipball/c9108757cc498eb4eb2e33e4a920dca4c724e758",
+                "reference": "c9108757cc498eb4eb2e33e4a920dca4c724e758",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Monolith\\Collections\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Shawn McCool",
+                    "email": "shawn@heybigname.com"
+                },
+                {
+                    "name": "Mitchell van Wijngaarden",
+                    "email": "mitchell@kooding.nl"
+                }
+            ],
+            "description": "Collection classes for the Monolith framework.",
+            "keywords": [
+                "collections",
+                "monolith"
+            ],
+            "time": "2018-09-22T13:41:18+00:00"
+        },
+        {
+            "name": "monolith/component-bootstrapping",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/monolith-php/component-bootstrapping.git",
+                "reference": "99259e33f6943908da033dc53c5302501aa5a25a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/monolith-php/component-bootstrapping/zipball/99259e33f6943908da033dc53c5302501aa5a25a",
+                "reference": "99259e33f6943908da033dc53c5302501aa5a25a",
+                "shasum": ""
+            },
+            "require": {
+                "monolith/collections": ">=2",
+                "monolith/dependency-injection": ">=4",
+                "php": "^7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Monolith\\ComponentBootstrapping\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Shawn McCool",
+                    "email": "shawn@heybigname.com"
+                }
+            ],
+            "description": "Module for bootstrapping components in the Monolith framework.",
+            "keywords": [
+                "component bootstrapping",
+                "monolith"
+            ],
+            "time": "2018-09-26T09:21:52+00:00"
+        },
+        {
+            "name": "monolith/dependency-injection",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/monolith-php/dependency-injection.git",
+                "reference": "2de4061dda4a264d4d46428816e14f692b8e44c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/monolith-php/dependency-injection/zipball/2de4061dda4a264d4d46428816e14f692b8e44c5",
+                "reference": "2de4061dda4a264d4d46428816e14f692b8e44c5",
+                "shasum": ""
+            },
+            "require": {
+                "monolith/collections": "^2",
+                "php": "^7.1",
+                "psr/container": "^1"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Monolith\\DependencyInjection\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Shawn McCool",
+                    "email": "shawn@heybigname.com"
+                }
+            ],
+            "description": "Dependency injection container for the Monolith framework.",
+            "homepage": "https://www.getmonolith.com",
+            "keywords": [
+                "container",
+                "dependency injection",
+                "monolith"
+            ],
+            "time": "2018-09-26T09:00:05+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1385,7 +1512,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "event-sourcery/event-sourcery": 20,
+        "monolith/component-bootstrapping": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
