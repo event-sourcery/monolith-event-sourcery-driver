@@ -14,7 +14,7 @@ use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
 use EventSourcery\EventSourcery\Serialization\ReflectionBasedDomainEventSerializer;
 use EventSourcery\EventSourcery\StreamProcessing\ProjectionManager;
 use EventSourcery\EventSourcery\StreamProcessing\Projections;
-use Monolith\ComponentLoading\ComponentBootstrap;
+use Monolith\ComponentBootstrapping\ComponentBootstrap;
 use Monolith\DependencyInjection\Container;
 
 class EventSourceryBootstrap implements ComponentBootstrap {
