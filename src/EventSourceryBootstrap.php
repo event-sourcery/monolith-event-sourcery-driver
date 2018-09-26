@@ -30,7 +30,7 @@ class EventSourceryBootstrap implements ComponentBootstrap {
         });
 
         $container->singleton(EventStore::class, function() use ($container) {
-            return new MonolithEventStore($container->make(DomainEventSerializer::class));
+            return new MonolithEventStore($container->get(DomainEventSerializer::class));
         });
 
         $container->singleton(ProjectionManager::class, function () {
@@ -44,8 +44,8 @@ class EventSourceryBootstrap implements ComponentBootstrap {
     }
 
     public function init(Container $container): void {
-        $dispatcher = $container->make(EventDispatcher::class);
+        $dispatcher = $container->get(EventDispatcher::class);
 
-        $dispatcher->addListener($container->make(ProjectionManager::class));
+        $dispatcher->addListener($container->get(ProjectionManager::class));
     }
 }
