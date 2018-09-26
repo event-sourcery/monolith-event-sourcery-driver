@@ -18,7 +18,7 @@
   "require": {
     "php": "^7.2",
     "event-sourcery/event-sourcery": "dev-master",
-    "monolith/component-bootstrapping": "4.2",
+    "monolith/component-bootstrapping": "^4",
     "psr/container": "1.0.0"
   },
   "autoload": {
