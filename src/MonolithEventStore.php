@@ -155,15 +155,14 @@ class MonolithEventStore implements EventStore {
      */
     private function store(StreamId $id, DomainEvent $event, StreamVersion $version, $metadata = ''): void {
         $this->query->execute(
-            'insert into :table (stream_id, stream_version, event_name, event_data, raised_at, meta_data) values(:stream_id, :stream_version, :event_name, :event_data, :raised_at, :meta_data)',
+            "insert into {$this->table} (stream_id, stream_version, event_name, event_data, raised_at, meta_data) values(:stream_id, :stream_version, :event_name, :event_data, :raised_at, :meta_data)",
             [
-                'table'          => $this->table,
                 'stream_id'      => $id->toString(),
                 'stream_version' => $version->toInt(),
                 'event_name'     => $this->serializer->eventNameForClass(get_class($event)),
                 'event_data'     => $this->serializer->serialize($event),
                 'raised_at'      => date('Y-m-d H:i:s'),
-                'meta_data'      => $metadata,
+                'meta_data'      => $metadata ?: '{}',
             ]
         );
     }
