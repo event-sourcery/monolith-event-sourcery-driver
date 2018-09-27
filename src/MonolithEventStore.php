@@ -10,8 +10,8 @@ use EventSourcery\EventSourcery\EventSourcing\StreamEvents;
 use EventSourcery\EventSourcery\EventSourcing\StreamId;
 use EventSourcery\EventSourcery\EventSourcing\StreamVersion;
 use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
-use Illuminate\Support\Collection;
 use Monolith\RelationalDatabase\Query;
+use Monolith\Collections\Collection;
 
 /**
  * The MonolithEventStore is a Monolith-specific implementation of

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0493a503d31d7023b4f284932a6b0910",
+    "content-hash": "c4a779871cf9d0db154bc5c1274034d0",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -238,16 +238,16 @@
         },
         {
             "name": "monolith/relational-database",
-            "version": "dev-master",
+            "version": "3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monolith-php/relational-database.git",
-                "reference": "3dbad49c422e4cfe41059541b62c2c896a8e52df"
+                "reference": "5602a7d51a7c09dac8c6c620eae5e680a1356846"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/relational-database/zipball/3dbad49c422e4cfe41059541b62c2c896a8e52df",
-                "reference": "3dbad49c422e4cfe41059541b62c2c896a8e52df",
+                "url": "https://api.github.com/repos/monolith-php/relational-database/zipball/5602a7d51a7c09dac8c6c620eae5e680a1356846",
+                "reference": "5602a7d51a7c09dac8c6c620eae5e680a1356846",
                 "shasum": ""
             },
             "require": {
@@ -275,7 +275,7 @@
                 "http",
                 "monolith"
             ],
-            "time": "2018-09-27T08:39:45+00:00"
+            "time": "2018-09-27T09:11:24+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1608,8 +1608,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "event-sourcery/event-sourcery": 20,
-        "monolith/relational-database": 20
+        "event-sourcery/event-sourcery": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -19,6 +19,7 @@
     "event-sourcery/event-sourcery": "dev-master",
     "monolith/component-bootstrapping": "^4",
     "monolith/relational-database": "^3",
+    "monolith/collections": "^2",
     "psr/container": "1.0.0"
   },
   "autoload": {
@@ -27,10 +28,8 @@
     }
   },
   "config": {
-    "preferred-install": "dist",
     "sort-packages": true,
     "bin-dir": "bin"
   },
-  "minimum-stability": "dev",
-  "license": "MIT"
+  "minimum-stability": "dev"
 }
