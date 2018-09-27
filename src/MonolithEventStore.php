@@ -122,13 +122,13 @@ class MonolithEventStore implements EventStore
      *
      * @param StreamId $id
      * @return Collection
+     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      */
     private function getStreamRawEventData(StreamId $id): Collection
     {
         return new Collection($this->query->read(
-            'SELECT * FROM :table WHERE stream_id = :stream_id order by stream_version asc',
+            "select * from {$this->table} where stream_id = :stream_id order by stream_version asc",
             [
-                'table'     => $this->table,
                 'stream_id' => $id->toString(),
             ]
         ));
@@ -140,13 +140,13 @@ class MonolithEventStore implements EventStore
      * @param int $take
      * @param int $skip
      * @return mixed
+     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      */
     private function getRawEvents($take = 0, $skip = 0): Collection
     {
         return new Collection($this->query->read(
-            'SELECT * FROM :table WHERE order by id asc limit :take offset :skip',
+            "SELECT * FROM {$this->table} WHERE order by id asc limit :take offset :skip",
             [
-                'table' => $this->table,
                 'take'  => $take,
                 'skip'  => $skip,
             ]
@@ -160,13 +160,13 @@ class MonolithEventStore implements EventStore
      * @param DomainEvent $event
      * @param StreamVersion $version
      * @param string $metadata
+     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      */
     private function store(StreamId $id, DomainEvent $event, StreamVersion $version, $metadata = ''): void
     {
         $this->query->write(
-            'insert into :table (stream_id, stream_version, event_name, event_data, raised_at, meta_data) values(:stream_id, :stream_version, :event_name, :event_data, :raised_at, :meta_data)',
+            "insert into {$this->table} (stream_id, stream_version, event_name, event_data, raised_at, meta_data) values(:stream_id, :stream_version, :event_name, :event_data, :raised_at, :meta_data)",
             [
-                'table'          => $this->table,
                 'stream_id'      => $id->toString(),
                 'stream_version' => $version->toInt(),
                 'event_name'     => $this->serializer->eventNameForClass(get_class($event)),
