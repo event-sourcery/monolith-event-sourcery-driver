@@ -50,7 +50,7 @@ class MonolithPersonalDataStore implements PersonalDataStore {
      * @throws \EventSourcery\EventSourcery\PersonalData\CryptographicDetailsNotCompatibleWithEncryption
      */
     public function retrieveData(PersonalKey $personalKey, PersonalDataKey $dataKey): PersonalData {
-        $data = $this->query->execute(
+        $data = $this->query->read(
             'select * from :table where data_key = :data_key',
             [
                 'table'        => $this->table,
@@ -82,7 +82,7 @@ class MonolithPersonalDataStore implements PersonalDataStore {
     public function storeData(PersonalKey $personalKey, PersonalDataKey $dataKey, PersonalData $data): void {
         $crypto = $this->cryptographyStore->getCryptographyFor($personalKey);
 
-        $this->query->execute(
+        $this->query->write(
             'insert into :table (personal_key, data_key, encrypted_personal_data, encryption) values (:personal_key, :data_key, :encrypted_personal_data, :encryption)',
             [
                 'table'                   => $this->table,
@@ -100,7 +100,7 @@ class MonolithPersonalDataStore implements PersonalDataStore {
      * @param PersonalKey $personalKey
      */
     function removeDataFor(PersonalKey $personalKey): void {
-        $this->query->execute(
+        $this->query->write(
             'delete from :table where personal_key = :personal_key',
             [
                 'table'        => $this->table,

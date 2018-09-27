@@ -41,7 +41,7 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      */
     function addPerson(PersonalKey $person, CryptographicDetails $crypto): void
     {
-        $this->query->execute(
+        $this->query->write(
             'insert into :table (personal_key, cryptographic_details, encryption) values(:personal_key, :cryptographic_details, :encription)',
             [
                 'table'                 => $this->table,
@@ -62,7 +62,7 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      */
     function getCryptographyFor(PersonalKey $person): CryptographicDetails
     {
-        $crypto = $this->query->execute(
+        $crypto = $this->query->read(
             'select * from :table where personal_key = :personal_key',
             [
                 'table'        => $this->table,
@@ -88,7 +88,7 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      */
     function removePerson(PersonalKey $person): void
     {
-        $this->query->execute(
+        $this->query->write(
             'delete from :table where personal_key = :personal_key',
             [
                 'table'        => $this->table,

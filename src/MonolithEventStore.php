@@ -143,7 +143,7 @@ class MonolithEventStore implements EventStore
      */
     private function getRawEvents($take = 0, $skip = 0): Collection
     {
-        return new Collection($this->query->execute(
+        return new Collection($this->query->read(
             'SELECT * FROM :table WHERE order by id asc limit :take offset :skip',
             [
                 'table' => $this->table,
@@ -163,7 +163,7 @@ class MonolithEventStore implements EventStore
      */
     private function store(StreamId $id, DomainEvent $event, StreamVersion $version, $metadata = ''): void
     {
-        $this->query->execute(
+        $this->query->write(
             'insert into :table (stream_id, stream_version, event_name, event_data, raised_at, meta_data) values(:stream_id, :stream_version, :event_name, :event_data, :raised_at, :meta_data)',
             [
                 'table'          => $this->table,
