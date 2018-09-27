@@ -6,6 +6,7 @@ use EventSourcery\EventSourcery\PersonalData\CouldNotFindCryptographyForPerson;
 use EventSourcery\EventSourcery\PersonalData\CryptographicDetails;
 use EventSourcery\EventSourcery\PersonalData\EncryptionKeyGenerator;
 use EventSourcery\EventSourcery\PersonalData\PersonalCryptographyStore;
+use EventSourcery\EventSourcery\PersonalData\PersonalDataEncryption;
 use EventSourcery\EventSourcery\PersonalData\PersonalEncryptionKeyStore;
 use EventSourcery\EventSourcery\PersonalData\PersonalKey;
 use Monolith\RelationalDatabase\Query;
@@ -15,15 +16,21 @@ use Monolith\RelationalDatabase\Query;
  * of a PersonalCryptographyStore. It uses the default relational driver for
  * the Monolith application.
  */
-class MonolithPersonalCryptographyStore implements PersonalCryptographyStore {
+class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
+{
 
     /** @var Query */
     private $query;
 
+    /** @var PersonalDataEncryption */
+    private $encryption;
+
     private $table = 'personal_cryptography_store';
 
-    public function __construct(Query $query) {
+    public function __construct(PersonalDataEncryption $encryption, Query $query)
+    {
         $this->query = $query;
+        $this->encryption = $encryption;
     }
 
     /**
@@ -32,7 +39,8 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore {
      * @param PersonalKey $person
      * @param CryptographicDetails $crypto
      */
-    function addPerson(PersonalKey $person, CryptographicDetails $crypto): void {
+    function addPerson(PersonalKey $person, CryptographicDetails $crypto): void
+    {
         $this->query->execute(
             'insert into :table (personal_key, cryptographic_details, encryption) values(:personal_key, :cryptographic_details, :encription)',
             [
@@ -52,7 +60,8 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore {
      * @return CryptographicDetails
      * @throws \EventSourcery\EventSourcery\PersonalData\CannotDeserializeCryptographicDetails
      */
-    function getCryptographyFor(PersonalKey $person): CryptographicDetails {
+    function getCryptographyFor(PersonalKey $person): CryptographicDetails
+    {
         $crypto = $this->query->execute(
             'select * from :table where personal_key = :personal_key',
             [
@@ -62,7 +71,9 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore {
         );
 
         if ( ! $crypto) {
-            throw new CanNotFindCryptographyForPerson($person->toString());
+            $this->addPerson($person, $this->encryption->generateCryptographicDetails());
+            return $this->getCryptographyFor($person);
+//            throw new CanNotFindCryptographyForPerson($person->toString());
         }
 
         $details = (array) json_decode($crypto->cryptographic_details);
@@ -75,7 +86,8 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore {
      *
      * @param PersonalKey $person
      */
-    function removePerson(PersonalKey $person): void {
+    function removePerson(PersonalKey $person): void
+    {
         $this->query->execute(
             'delete from :table where personal_key = :personal_key',
             [

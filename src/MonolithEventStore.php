@@ -18,7 +18,8 @@ use Monolith\RelationalDatabase\Query;
  * an EventStore. It uses the default relational driver configured
  * in the Monolith application.
  */
-class MonolithEventStore implements EventStore {
+class MonolithEventStore implements EventStore
+{
 
     /** @var DomainEventSerializer */
     private $serializer;
@@ -31,10 +32,11 @@ class MonolithEventStore implements EventStore {
 
     private $table = 'event_store';
 
-    public function __construct(DomainEventSerializer $serializer, EventDispatcher $eventDispatcher, Query $query) {
-        $this->serializer      = $serializer;
+    public function __construct(DomainEventSerializer $serializer, EventDispatcher $eventDispatcher, Query $query)
+    {
+        $this->serializer = $serializer;
         $this->eventDispatcher = $eventDispatcher;
-        $this->query           = $query;
+        $this->query = $query;
     }
 
     /**
@@ -42,7 +44,8 @@ class MonolithEventStore implements EventStore {
      *
      * @param StreamEvents $events
      */
-    public function storeStream(StreamEvents $events): void {
+    public function storeStream(StreamEvents $events): void
+    {
         // store events
         $events->each(function (StreamEvent $stream) {
             $this->store($stream->id(), $stream->event(), $stream->version());
@@ -59,7 +62,8 @@ class MonolithEventStore implements EventStore {
      *
      * @param DomainEvent $event
      */
-    public function storeEvent(DomainEvent $event): void {
+    public function storeEvent(DomainEvent $event): void
+    {
         $this->store(
             StreamId::fromString(0),
             $event,
@@ -76,7 +80,8 @@ class MonolithEventStore implements EventStore {
      * @param StreamId $id
      * @return StreamEvents
      */
-    public function getStream(StreamId $id): StreamEvents {
+    public function getStream(StreamId $id): StreamEvents
+    {
         return StreamEvents::make(
             $this->getStreamRawEventData($id)->map(function ($e) {
 
@@ -100,7 +105,8 @@ class MonolithEventStore implements EventStore {
      * @param int $skip
      * @return DomainEvents
      */
-    public function getEvents($take = 0, $skip = 0): DomainEvents {
+    public function getEvents($take = 0, $skip = 0): DomainEvents
+    {
         $eventData = $this->getRawEvents($take, $skip);
 
         $events = $eventData->map(function ($e) {
@@ -117,7 +123,8 @@ class MonolithEventStore implements EventStore {
      * @param StreamId $id
      * @return Collection
      */
-    private function getStreamRawEventData(StreamId $id): Collection {
+    private function getStreamRawEventData(StreamId $id): Collection
+    {
         return new Collection($this->query->execute(
             'SELECT * FROM :table WHERE stream_id = :stream_id order by stream_version asc',
             [
@@ -134,7 +141,8 @@ class MonolithEventStore implements EventStore {
      * @param int $skip
      * @return mixed
      */
-    private function getRawEvents($take = 0, $skip = 0): Collection {
+    private function getRawEvents($take = 0, $skip = 0): Collection
+    {
         return new Collection($this->query->execute(
             'SELECT * FROM :table WHERE order by id asc limit :take offset :skip',
             [
@@ -153,10 +161,12 @@ class MonolithEventStore implements EventStore {
      * @param StreamVersion $version
      * @param string $metadata
      */
-    private function store(StreamId $id, DomainEvent $event, StreamVersion $version, $metadata = ''): void {
+    private function store(StreamId $id, DomainEvent $event, StreamVersion $version, $metadata = ''): void
+    {
         $this->query->execute(
-            "insert into {$this->table} (stream_id, stream_version, event_name, event_data, raised_at, meta_data) values(:stream_id, :stream_version, :event_name, :event_data, :raised_at, :meta_data)",
+            'insert into :table (stream_id, stream_version, event_name, event_data, raised_at, meta_data) values(:stream_id, :stream_version, :event_name, :event_data, :raised_at, :meta_data)',
             [
+                'table'          => $this->table,
                 'stream_id'      => $id->toString(),
                 'stream_version' => $version->toInt(),
                 'event_name'     => $this->serializer->eventNameForClass(get_class($event)),
