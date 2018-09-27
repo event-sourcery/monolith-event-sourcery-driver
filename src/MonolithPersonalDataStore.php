@@ -1,6 +1,5 @@
 <?php namespace EventSourcery\Monolith;
 
-use DB;
 use EventSourcery\EventSourcery\PersonalData\CanNotFindPersonalDataByKey;
 use EventSourcery\EventSourcery\PersonalData\CouldNotRetrievePersonalData;
 use EventSourcery\EventSourcery\PersonalData\EncryptedPersonalData;
@@ -13,7 +12,7 @@ use EventSourcery\EventSourcery\PersonalData\PersonalEncryptionKeyStore;
 use EventSourcery\EventSourcery\PersonalData\PersonalKey;
 use EventSourcery\EventSourcery\PersonalData\ProtectedData;
 use EventSourcery\EventSourcery\PersonalData\ProtectedDataKey;
-use Monolith\RelationalDatabase\Query;
+use Monolith\RelationalDatabase\Db;
 
 /**
  * The MonolithPersonalDataStore is the Monolith-specific implementation of
@@ -29,16 +28,16 @@ class MonolithPersonalDataStore implements PersonalDataStore
     /** @var PersonalDataEncryption */
     private $encryption;
 
-    /** @var Query */
-    private $query;
+    /** @var Db */
+    private $db;
 
     private $table = 'personal_data_store';
 
-    public function __construct(PersonalCryptographyStore $cryptographyStore, PersonalDataEncryption $encryption, Query $query)
+    public function __construct(PersonalCryptographyStore $cryptographyStore, PersonalDataEncryption $encryption, Db $db)
     {
         $this->cryptographyStore = $cryptographyStore;
         $this->encryption = $encryption;
-        $this->query = $query;
+        $this->db = $db;
     }
 
     /**
@@ -54,7 +53,7 @@ class MonolithPersonalDataStore implements PersonalDataStore
      */
     public function retrieveData(PersonalKey $personalKey, PersonalDataKey $dataKey): PersonalData
     {
-        $data = $this->query->readOne(
+        $data = $this->db->readOne(
             "select * from {$this->table} where data_key = :data_key and personal_key = :personal_key",
             [
                 'personal_key' => $personalKey->toString(),
@@ -88,7 +87,7 @@ class MonolithPersonalDataStore implements PersonalDataStore
     {
         $crypto = $this->cryptographyStore->getCryptographyFor($personalKey);
 
-        $this->query->write(
+        $this->db->write(
             "insert into {$this->table} (personal_key, data_key, encrypted_personal_data, encryption, stored_at) values (:personal_key, :data_key, :encrypted_personal_data, :encryption, :stored_at)",
             [
                 'personal_key'            => $personalKey->toString(),
@@ -108,7 +107,7 @@ class MonolithPersonalDataStore implements PersonalDataStore
      */
     function removeDataFor(PersonalKey $personalKey): void
     {
-        $this->query->write(
+        $this->db->write(
             "delete from {$this->table} where personal_key = :personal_key",
             [
                 'personal_key' => $personalKey->serialize(),

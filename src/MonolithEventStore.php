@@ -1,6 +1,5 @@
 <?php namespace EventSourcery\Monolith;
 
-use DB;
 use EventSourcery\EventSourcery\EventDispatch\EventDispatcher;
 use EventSourcery\EventSourcery\EventSourcing\DomainEvent;
 use EventSourcery\EventSourcery\EventSourcing\DomainEvents;
@@ -10,7 +9,7 @@ use EventSourcery\EventSourcery\EventSourcing\StreamEvents;
 use EventSourcery\EventSourcery\EventSourcing\StreamId;
 use EventSourcery\EventSourcery\EventSourcing\StreamVersion;
 use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
-use Monolith\RelationalDatabase\Query;
+use Monolith\RelationalDatabase\Db;
 use Monolith\Collections\Collection;
 
 /**
@@ -27,16 +26,16 @@ class MonolithEventStore implements EventStore
     /** @var EventDispatcher */
     private $eventDispatcher;
 
-    /** @var Query */
-    private $query;
+    /** @var Db */
+    private $db;
 
     private $table = 'event_store';
 
-    public function __construct(DomainEventSerializer $serializer, EventDispatcher $eventDispatcher, Query $query)
+    public function __construct(DomainEventSerializer $serializer, EventDispatcher $eventDispatcher, Db $db)
     {
         $this->serializer = $serializer;
         $this->eventDispatcher = $eventDispatcher;
-        $this->query = $query;
+        $this->db = $db;
     }
 
     /**
@@ -127,7 +126,7 @@ class MonolithEventStore implements EventStore
      */
     private function getStreamRawEventData(StreamId $id): Collection
     {
-        return new Collection((array) $this->query->read(
+        return new Collection((array) $this->db->read(
             "select * from {$this->table} where stream_id = :stream_id order by stream_version asc",
             [
                 'stream_id' => $id->toString(),
@@ -145,7 +144,7 @@ class MonolithEventStore implements EventStore
      */
     private function getRawEvents($take = 0, $skip = 0): Collection
     {
-        return new Collection($this->query->read(
+        return new Collection($this->db->read(
             "SELECT * FROM {$this->table} WHERE order by id asc limit :take offset :skip",
             [
                 'take'  => $take,
@@ -165,7 +164,7 @@ class MonolithEventStore implements EventStore
      */
     private function store(StreamId $id, DomainEvent $event, StreamVersion $version, $metadata = ''): void
     {
-        $this->query->write(
+        $this->db->write(
             "insert into {$this->table} (stream_id, stream_version, event_name, event_data, raised_at, meta_data) values(:stream_id, :stream_version, :event_name, :event_data, :raised_at, :meta_data)",
             [
                 'stream_id'      => $id->toString(),

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c4a779871cf9d0db154bc5c1274034d0",
+    "content-hash": "0186b07a63f1be2b71c8ac2d1accf672",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -67,18 +67,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/event-sourcery/event-sourcery.git",
-                "reference": "8cd0f3b6e7e06765f2e6c9422ef2605fd94b1ee2"
+                "reference": "431afef7048e80f4ca498d95776fd78cc7e6333d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/8cd0f3b6e7e06765f2e6c9422ef2605fd94b1ee2",
-                "reference": "8cd0f3b6e7e06765f2e6c9422ef2605fd94b1ee2",
+                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/431afef7048e80f4ca498d95776fd78cc7e6333d",
+                "reference": "431afef7048e80f4ca498d95776fd78cc7e6333d",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1",
                 "phpspec/phpspec": "^4.0.3",
-                "psr/container": "1.0.0",
+                "psr/container": "^1",
                 "ramsey/uuid": "^3.7"
             },
             "type": "library",
@@ -107,7 +107,7 @@
                 "gdpr",
                 "reactive"
             ],
-            "time": "2018-09-18T10:58:41+00:00"
+            "time": "2018-09-27T09:50:21+00:00"
         },
         {
             "name": "monolith/collections",
@@ -193,6 +193,49 @@
             "time": "2018-09-26T10:04:59+00:00"
         },
         {
+            "name": "monolith/configuration",
+            "version": "2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/monolith-php/configuration.git",
+                "reference": "3f965ba4d69919722bd66669820d0070e9d756fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/monolith-php/configuration/zipball/3f965ba4d69919722bd66669820d0070e9d756fa",
+                "reference": "3f965ba4d69919722bd66669820d0070e9d756fa",
+                "shasum": ""
+            },
+            "require": {
+                "monolith/component-bootstrapping": "^4",
+                "php": "^7.1",
+                "vlucas/phpdotenv": "^2.5@dev"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Monolith\\Configuration\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Shawn McCool",
+                    "email": "shawn@heybigname.com"
+                }
+            ],
+            "description": "Configuration management module for the Monolith framework.",
+            "homepage": "https://www.getmonolith.com",
+            "keywords": [
+                "http",
+                "monolith"
+            ],
+            "time": "2018-09-26T13:11:29+00:00"
+        },
+        {
             "name": "monolith/dependency-injection",
             "version": "dev-master",
             "source": {
@@ -238,16 +281,16 @@
         },
         {
             "name": "monolith/relational-database",
-            "version": "3.3",
+            "version": "4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monolith-php/relational-database.git",
-                "reference": "5602a7d51a7c09dac8c6c620eae5e680a1356846"
+                "reference": "f8f9ece9fc86914eafc2c9bae51437a0d76a4ddf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/relational-database/zipball/5602a7d51a7c09dac8c6c620eae5e680a1356846",
-                "reference": "5602a7d51a7c09dac8c6c620eae5e680a1356846",
+                "url": "https://api.github.com/repos/monolith-php/relational-database/zipball/f8f9ece9fc86914eafc2c9bae51437a0d76a4ddf",
+                "reference": "f8f9ece9fc86914eafc2c9bae51437a0d76a4ddf",
                 "shasum": ""
             },
             "require": {
@@ -275,7 +318,7 @@
                 "http",
                 "monolith"
             ],
-            "time": "2018-09-27T09:11:24+00:00"
+            "time": "2018-09-27T11:18:45+00:00"
         },
         {
             "name": "paragonie/random_compat",

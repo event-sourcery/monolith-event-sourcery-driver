@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
     config.vm.provision "ansible" do |ansible|
         ansible.playbook = "virtual-machine/provision.yml"
         ansible.extra_vars = {
-            hostname: "dev",
+            hostname: "es-monolith",
 
             install_db: "yes",
             dbuser: "root",

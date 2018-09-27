@@ -1,6 +1,5 @@
 <?php namespace EventSourcery\Monolith;
 
-use DB;
 use EventSourcery\EventSourcery\PersonalData\CanNotFindCryptographyForPerson;
 use EventSourcery\EventSourcery\PersonalData\CouldNotFindCryptographyForPerson;
 use EventSourcery\EventSourcery\PersonalData\CryptographicDetails;
@@ -9,7 +8,7 @@ use EventSourcery\EventSourcery\PersonalData\PersonalCryptographyStore;
 use EventSourcery\EventSourcery\PersonalData\PersonalDataEncryption;
 use EventSourcery\EventSourcery\PersonalData\PersonalEncryptionKeyStore;
 use EventSourcery\EventSourcery\PersonalData\PersonalKey;
-use Monolith\RelationalDatabase\Query;
+use Monolith\RelationalDatabase\Db;
 
 /**
  * The MonolithPersonalCryptographyStore is the Monolith-specific implementation
@@ -19,17 +18,17 @@ use Monolith\RelationalDatabase\Query;
 class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
 {
 
-    /** @var Query */
-    private $query;
+    /** @var Db */
+    private $db;
 
     /** @var PersonalDataEncryption */
     private $encryption;
 
     private $table = 'personal_cryptography_store';
 
-    public function __construct(PersonalDataEncryption $encryption, Query $query)
+    public function __construct(PersonalDataEncryption $encryption, Db $db)
     {
-        $this->query = $query;
+        $this->db = $db;
         $this->encryption = $encryption;
     }
 
@@ -42,7 +41,7 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      */
     function addPerson(PersonalKey $person, CryptographicDetails $crypto): void
     {
-        $this->query->write(
+        $this->db->write(
             "insert into {$this->table} (personal_key, cryptographic_details, encryption, added_at) values(:personal_key, :cryptographic_details, :encryption, :added_at)",
             [
                 'personal_key'          => $person->toString(),
@@ -64,7 +63,7 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      */
     function getCryptographyFor(PersonalKey $person): CryptographicDetails
     {
-        $crypto = $this->query->readOne(
+        $crypto = $this->db->readOne(
             "select * from {$this->table} where personal_key = :personal_key",
             [
                 'personal_key' => $person->toString(),
@@ -89,7 +88,7 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      */
     function removePerson(PersonalKey $person): void
     {
-        $this->query->write(
+        $this->db->write(
             "update {$this->table} set cryptographic_details = '', cleared_at = :cleared_at where personal_key = :personal_key",
             [
                 'personal_key' => $person->toString(),
