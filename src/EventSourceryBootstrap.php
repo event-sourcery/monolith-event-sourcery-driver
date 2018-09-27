@@ -17,7 +17,6 @@ use EventSourcery\EventSourcery\StreamProcessing\ProjectionManager;
 use EventSourcery\EventSourcery\StreamProcessing\Projections;
 use Monolith\ComponentBootstrapping\ComponentBootstrap;
 use Monolith\DependencyInjection\Container;
-use Monolith\RelationalDatabase\Db;
 
 class EventSourceryBootstrap implements ComponentBootstrap
 {
@@ -26,6 +25,30 @@ class EventSourceryBootstrap implements ComponentBootstrap
         $container->bind(PersonalDataEncryption::class, LibSodiumEncryption::class);
 
         $container->singleton(DomainEventClassMap::class);
+
+        $container->bind(EventStoreDb::class, function (Container $c) {
+            return new EventStoreDb(
+                getenv('EVENT_STORE_DSN'),
+                getenv('EVENT_STORE_USERNAME'),
+                getenv('EVENT_STORE_PASSWORD')
+            );
+        });
+
+        $container->bind(PersonalDataStoreDb::class, function (Container $c) {
+            return new PersonalDataStoreDb(
+                getenv('PERSONAL_DATA_STORE_DSN'),
+                getenv('PERSONAL_DATA_STORE_USERNAME'),
+                getenv('PERSONAL_DATA_STORE_PASSWORD')
+            );
+        });
+
+        $container->bind(PersonalCryptographyStoreDb::class, function (Container $c) {
+            return new PersonalCryptographyStoreDb(
+                getenv('PERSONAL_CRYPTOGRAPHY_STORE_DSN'),
+                getenv('PERSONAL_CRYPTOGRAPHY_STORE_USERNAME'),
+                getenv('PERSONAL_CRYPTOGRAPHY_STORE_PASSWORD')
+            );
+        });
 
         $container->bind(DomainEventSerializer::class, function (Container $c) {
             return new ReflectionBasedDomainEventSerializer(
@@ -43,17 +66,7 @@ class EventSourceryBootstrap implements ComponentBootstrap
             return new ImmediateEventDispatcher();
         });
 
-        $container->singleton(EventStore::class, function () use ($container) {
-            return new MonolithEventStore(
-                $container->get(DomainEventSerializer::class),
-                $container->get(EventDispatcher::class),
-                new Db(
-                    getenv('EVENT_STORE_DSN'),
-                    getenv('EVENT_STORE_USERNAME'),
-                    getenv('EVENT_STORE_PASSWORD')
-                )
-            );
-        });
+
 
         $container->singleton(ProjectionManager::class, function () {
             return new ProjectionManager(Projections::make([]));
@@ -63,14 +76,11 @@ class EventSourceryBootstrap implements ComponentBootstrap
             return new ReflectionResolutionCommandBus($c);
         });
 
-        $container->bind(PersonalCryptographyStore::class, function (Container $c) {
-            return new MonolithPersonalCryptographyStore(
-                $c->get(PersonalDataEncryption::class),
-                new Db(
-                    getenv('CRYPTOGRAPHY_STORE_DSN'),
-                    getenv('CRYPTOGRAPHY_STORE_USERNAME'),
-                    getenv('CRYPTOGRAPHY_STORE_PASSWORD')
-                )
+        $container->singleton(EventStore::class, function () use ($container) {
+            return new MonolithEventStore(
+                $container->get(DomainEventSerializer::class),
+                $container->get(EventDispatcher::class),
+                $container->get(EventStoreDb::class)
             );
         });
 
@@ -78,11 +88,14 @@ class EventSourceryBootstrap implements ComponentBootstrap
             return new MonolithPersonalDataStore(
                 $c->get(PersonalCryptographyStore::class),
                 $c->get(PersonalDataEncryption::class),
-                new Db(
-                    getenv('PERSONAL_DATA_STORE_DSN'),
-                    getenv('PERSONAL_DATA_STORE_USERNAME'),
-                    getenv('PERSONAL_DATA_STORE_PASSWORD')
-                )
+                $c->get(PersonalDataStoreDb::class)
+            );
+        });
+
+        $container->bind(PersonalCryptographyStore::class, function (Container $c) {
+            return new MonolithPersonalCryptographyStore(
+                $c->get(PersonalDataEncryption::class),
+                $c->get(PersonalCryptographyStoreDb::class)
             );
         });
     }

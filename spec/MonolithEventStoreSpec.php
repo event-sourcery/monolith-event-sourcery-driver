@@ -3,6 +3,7 @@
 use EventSourcery\EventSourcery\EventDispatch\EventDispatcher;
 use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
 use EventSourcery\Monolith\EventSourceryBootstrap;
+use EventSourcery\Monolith\EventStoreDb;
 use EventSourcery\Monolith\MonolithEventStore;
 use Monolith\ComponentBootstrapping\ComponentLoader;
 use Monolith\Configuration\ConfigurationBootstrap;
@@ -31,11 +32,7 @@ class MonolithEventStoreSpec extends ObjectBehavior
         $this->beConstructedWith(
             $container->get(DomainEventSerializer::class),
             $container->get(EventDispatcher::class),
-            new Db(
-                getenv('EVENT_STORE_DSN'),
-                getenv('EVENT_STORE_USERNAME'),
-                getenv('EVENT_STORE_PASSWORD')
-            )
+            $container->get(EventStoreDb::class)
         );
     }
 

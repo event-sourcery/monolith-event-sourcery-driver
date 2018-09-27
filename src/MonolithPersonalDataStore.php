@@ -12,7 +12,6 @@ use EventSourcery\EventSourcery\PersonalData\PersonalEncryptionKeyStore;
 use EventSourcery\EventSourcery\PersonalData\PersonalKey;
 use EventSourcery\EventSourcery\PersonalData\ProtectedData;
 use EventSourcery\EventSourcery\PersonalData\ProtectedDataKey;
-use Monolith\RelationalDatabase\Db;
 
 /**
  * The MonolithPersonalDataStore is the Monolith-specific implementation of
@@ -28,12 +27,12 @@ class MonolithPersonalDataStore implements PersonalDataStore
     /** @var PersonalDataEncryption */
     private $encryption;
 
-    /** @var Db */
+    /** @var PersonalDataStoreDb */
     private $db;
 
     private $table = 'personal_data_store';
 
-    public function __construct(PersonalCryptographyStore $cryptographyStore, PersonalDataEncryption $encryption, Db $db)
+    public function __construct(PersonalCryptographyStore $cryptographyStore, PersonalDataEncryption $encryption, PersonalDataStoreDb $db)
     {
         $this->cryptographyStore = $cryptographyStore;
         $this->encryption = $encryption;

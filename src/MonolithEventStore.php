@@ -9,7 +9,6 @@ use EventSourcery\EventSourcery\EventSourcing\StreamEvents;
 use EventSourcery\EventSourcery\EventSourcing\StreamId;
 use EventSourcery\EventSourcery\EventSourcing\StreamVersion;
 use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
-use Monolith\RelationalDatabase\Db;
 use Monolith\Collections\Collection;
 
 /**
@@ -26,12 +25,12 @@ class MonolithEventStore implements EventStore
     /** @var EventDispatcher */
     private $eventDispatcher;
 
-    /** @var Db */
+    /** @var EventStoreDb */
     private $db;
 
     private $table = 'event_store';
 
-    public function __construct(DomainEventSerializer $serializer, EventDispatcher $eventDispatcher, Db $db)
+    public function __construct(DomainEventSerializer $serializer, EventDispatcher $eventDispatcher, EventStoreDb $db)
     {
         $this->serializer = $serializer;
         $this->eventDispatcher = $eventDispatcher;
