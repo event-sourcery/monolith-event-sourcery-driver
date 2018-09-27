@@ -38,13 +38,13 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      *
      * @param PersonalKey $person
      * @param CryptographicDetails $crypto
+     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      */
     function addPerson(PersonalKey $person, CryptographicDetails $crypto): void
     {
         $this->query->write(
-            'insert into :table (personal_key, cryptographic_details, encryption) values(:personal_key, :cryptographic_details, :encryption)',
+            "insert into {$this->table} (personal_key, cryptographic_details, encryption) values(:personal_key, :cryptographic_details, :encryption)",
             [
-                'table'                 => $this->table,
                 'personal_key'          => $person->toString(),
                 'cryptographic_details' => json_encode($crypto->serialize()),
                 'encryption'            => $crypto->encryption(),
@@ -59,13 +59,13 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      * @throws CanNotFindCryptographyForPerson
      * @return CryptographicDetails
      * @throws \EventSourcery\EventSourcery\PersonalData\CannotDeserializeCryptographicDetails
+     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      */
     function getCryptographyFor(PersonalKey $person): CryptographicDetails
     {
         $crypto = $this->query->read(
-            'select * from :table where personal_key = :personal_key',
+            "select * from {$this->table} where personal_key = :personal_key",
             [
-                'table'        => $this->table,
                 'personal_key' => $person->toString(),
             ]
         );
@@ -73,7 +73,6 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
         if ( ! $crypto) {
             $this->addPerson($person, $this->encryption->generateCryptographicDetails());
             return $this->getCryptographyFor($person);
-//            throw new CanNotFindCryptographyForPerson($person->toString());
         }
 
         $details = (array) json_decode($crypto->cryptographic_details);
@@ -85,13 +84,13 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      * remove cryptographic details for a person (identified by personal key)
      *
      * @param PersonalKey $person
+     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      */
     function removePerson(PersonalKey $person): void
     {
         $this->query->write(
-            'delete from :table where personal_key = :personal_key',
+            "delete from {$this->table} where personal_key = :personal_key",
             [
-                'table'        => $this->table,
                 'personal_key' => $person->toString(),
             ]
         );
