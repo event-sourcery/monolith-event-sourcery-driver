@@ -88,7 +88,7 @@ class MonolithPersonalDataStore implements PersonalDataStore
         $crypto = $this->cryptographyStore->getCryptographyFor($personalKey);
 
         $this->query->write(
-            "insert into {$this->table} (personal_key, data_key, encrypted_personal_data, encryption) values (:personal_key, :data_key, :encrypted_personal_data, :encryption)",
+            "insert into {$this->table} (personal_key, data_key, encrypted_personal_data, encryption, stored_at) values (:personal_key, :data_key, :encrypted_personal_data, :encryption, :stored_at)",
             [
                 'personal_key'            => $personalKey->toString(),
                 'data_key'                => $dataKey->toString(),
