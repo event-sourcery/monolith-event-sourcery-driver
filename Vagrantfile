@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
     config.vm.provider :virtualbox do |v|
         v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
         v.customize ["modifyvm", :id, "--memory", 1024]
-        v.customize ["modifyvm", :id, "--name", "event-sourcery-laravel-driver"]
+        v.customize ["modifyvm", :id, "--name", "Event Sourcery Monolith Driver"]
     end
 
     config.vm.provision "shell" do |s|
