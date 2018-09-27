@@ -11,14 +11,14 @@
   "authors": [
     {
       "name": "Shawn McCool",
-      "email": "shawn@heybigname.com",
-      "homepage": "http://shawnmc.cool/"
+      "email": "shawn@heybigname.com"
     }
   ],
   "require": {
     "php": "^7.2",
     "event-sourcery/event-sourcery": "dev-master",
     "monolith/component-bootstrapping": "^4",
+    "monolith/relational-database": "^3",
     "psr/container": "1.0.0"
   },
   "autoload": {

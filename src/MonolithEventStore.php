@@ -125,7 +125,7 @@ class MonolithEventStore implements EventStore
      */
     private function getStreamRawEventData(StreamId $id): Collection
     {
-        return new Collection($this->query->execute(
+        return new Collection($this->query->read(
             'SELECT * FROM :table WHERE stream_id = :stream_id order by stream_version asc',
             [
                 'table'     => $this->table,
