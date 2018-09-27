@@ -48,6 +48,7 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
                 'personal_key'          => $person->toString(),
                 'cryptographic_details' => json_encode($crypto->serialize()),
                 'encryption'            => $crypto->encryption(),
+                'added_at'              => date('Y-m-d H:i:s'),
             ]
         );
     }
@@ -89,9 +90,10 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
     function removePerson(PersonalKey $person): void
     {
         $this->query->write(
-            "delete from {$this->table} where personal_key = :personal_key",
+            "update {$this->table} set cryptographic_details = '', cleared_at = :cleared_at where personal_key = :personal_key",
             [
                 'personal_key' => $person->toString(),
+                'cleared_at'   => date('Y-m-d H:i:s'),
             ]
         );
     }

@@ -20,7 +20,8 @@ use Monolith\RelationalDatabase\Query;
  * a PersonalDataStore. It uses the default relational driver configured
  * in the Monolith application.
  */
-class MonolithPersonalDataStore implements PersonalDataStore {
+class MonolithPersonalDataStore implements PersonalDataStore
+{
 
     /** @var PersonalCryptographyStore */
     private $cryptographyStore;
@@ -33,10 +34,11 @@ class MonolithPersonalDataStore implements PersonalDataStore {
 
     private $table = 'personal_data_store';
 
-    public function __construct(PersonalCryptographyStore $cryptographyStore, PersonalDataEncryption $encryption, Query $query) {
+    public function __construct(PersonalCryptographyStore $cryptographyStore, PersonalDataEncryption $encryption, Query $query)
+    {
         $this->cryptographyStore = $cryptographyStore;
-        $this->encryption        = $encryption;
-        $this->query             = $query;
+        $this->encryption = $encryption;
+        $this->query = $query;
     }
 
     /**
@@ -50,7 +52,8 @@ class MonolithPersonalDataStore implements PersonalDataStore {
      * @throws \EventSourcery\EventSourcery\PersonalData\CryptographicDetailsNotCompatibleWithEncryption
      * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      */
-    public function retrieveData(PersonalKey $personalKey, PersonalDataKey $dataKey): PersonalData {
+    public function retrieveData(PersonalKey $personalKey, PersonalDataKey $dataKey): PersonalData
+    {
         $data = $this->query->read(
             "select * from {$this->table} where data_key = :data_key",
             [
@@ -80,7 +83,8 @@ class MonolithPersonalDataStore implements PersonalDataStore {
      * @throws \EventSourcery\EventSourcery\PersonalData\CryptographicDetailsNotCompatibleWithEncryption
      * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      */
-    public function storeData(PersonalKey $personalKey, PersonalDataKey $dataKey, PersonalData $data): void {
+    public function storeData(PersonalKey $personalKey, PersonalDataKey $dataKey, PersonalData $data): void
+    {
         $crypto = $this->cryptographyStore->getCryptographyFor($personalKey);
 
         $this->query->write(
@@ -90,6 +94,7 @@ class MonolithPersonalDataStore implements PersonalDataStore {
                 'data_key'                => $dataKey->toString(),
                 'encrypted_personal_data' => $this->encryption->encrypt($data, $crypto)->serialize(),
                 'encryption'              => $crypto->encryption(),
+                'stored_at'               => date('Y-m-d H:i:s')
             ]
         );
     }
@@ -100,7 +105,8 @@ class MonolithPersonalDataStore implements PersonalDataStore {
      * @param PersonalKey $personalKey
      * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      */
-    function removeDataFor(PersonalKey $personalKey): void {
+    function removeDataFor(PersonalKey $personalKey): void
+    {
         $this->query->write(
             "delete from {$this->table} where personal_key = :personal_key",
             [
