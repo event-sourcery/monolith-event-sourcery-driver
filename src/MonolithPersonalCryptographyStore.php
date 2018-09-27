@@ -42,7 +42,7 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
     function addPerson(PersonalKey $person, CryptographicDetails $crypto): void
     {
         $this->query->write(
-            'insert into :table (personal_key, cryptographic_details, encryption) values(:personal_key, :cryptographic_details, :encription)',
+            'insert into :table (personal_key, cryptographic_details, encryption) values(:personal_key, :cryptographic_details, :encryption)',
             [
                 'table'                 => $this->table,
                 'personal_key'          => $person->toString(),
