@@ -52,9 +52,7 @@ class MonolithEventStore implements EventStore
         });
 
         // event dispatch
-        $events->each(function (StreamEvent $stream) {
-            $this->eventDispatcher->dispatch($stream->event());
-        });
+        $this->eventDispatcher->dispatch($events->toDomainEvents());
     }
 
     /**
