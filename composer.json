@@ -27,6 +27,14 @@
       "EventSourcery\\Monolith\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "spec\\EventSourcery\\Monolith\\": "spec/"
+    },
+    "files": [
+      "spec/functions.php"
+    ]
+  },
   "config": {
     "sort-packages": true,
     "bin-dir": "bin"

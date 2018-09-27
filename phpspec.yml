@@ -1,0 +1,7 @@
+suites:
+  main:
+    namespace: "Event-Sourcery\\Monolith"
+    psr4_prefix: "Event-Sourcery\\Monolith"
+    src_path: src
+formatter.name: pretty
+stop_on_failure: true
