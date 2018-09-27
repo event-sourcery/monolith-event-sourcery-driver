@@ -61,6 +61,7 @@ class MonolithEventStore implements EventStore
      * persist a single event
      *
      * @param DomainEvent $event
+     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      */
     public function storeEvent(DomainEvent $event): void
     {
@@ -79,6 +80,7 @@ class MonolithEventStore implements EventStore
      *
      * @param StreamId $id
      * @return StreamEvents
+     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      */
     public function getStream(StreamId $id): StreamEvents
     {
@@ -104,6 +106,7 @@ class MonolithEventStore implements EventStore
      * @param int $take
      * @param int $skip
      * @return DomainEvents
+     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      */
     public function getEvents($take = 0, $skip = 0): DomainEvents
     {
