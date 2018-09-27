@@ -54,10 +54,11 @@ class MonolithPersonalDataStore implements PersonalDataStore
      */
     public function retrieveData(PersonalKey $personalKey, PersonalDataKey $dataKey): PersonalData
     {
-        $data = $this->query->read(
-            "select * from {$this->table} where data_key = :data_key",
+        $data = $this->query->readOne(
+            "select * from {$this->table} where data_key = :data_key and personal_key = :personal_key",
             [
-                'personal_key' => $dataKey->serialize(),
+                'personal_key' => $personalKey->toString(),
+                'data_key' => $dataKey->toString(),
             ]
         );
 

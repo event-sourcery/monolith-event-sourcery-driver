@@ -64,7 +64,7 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      */
     function getCryptographyFor(PersonalKey $person): CryptographicDetails
     {
-        $crypto = $this->query->read(
+        $crypto = $this->query->readOne(
             "select * from {$this->table} where personal_key = :personal_key",
             [
                 'personal_key' => $person->toString(),
