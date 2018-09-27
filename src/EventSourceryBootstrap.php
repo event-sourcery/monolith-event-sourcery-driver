@@ -22,10 +22,35 @@ class EventSourceryBootstrap implements ComponentBootstrap
 {
     public function bind(Container $container): void
     {
-        $container->bind(PersonalDataEncryption::class, LibSodiumEncryption::class);
+        // CQRS
+        $container->bind(CommandBus::class, function (Container $c) {
+            return new ReflectionResolutionCommandBus($c);
+        });
 
+        $container->singleton(ProjectionManager::class, function () {
+            return new ProjectionManager(Projections::make([]));
+        });
+
+        // Domain Event Serialization
         $container->singleton(DomainEventClassMap::class);
 
+        $container->bind(DomainEventSerializer::class, function (Container $c) {
+            return new ReflectionBasedDomainEventSerializer(
+                $c->get(DomainEventClassMap::class),
+                $c->get(ValueSerializer::class),
+                $c->get(PersonalDataStore::class)
+            );
+        });
+
+        $container->singleton(ValueSerializer::class, function (Container $c) {
+            return new ValueSerializer($c->get(PersonalDataStore::class));
+        });
+
+        // Implementation Binding
+        $container->bind(PersonalDataEncryption::class, LibSodiumEncryption::class);
+        $container->singleton(EventDispatcher::class, ImmediateEventDispatcher::class);
+
+        // Database Connection Configuration
         $container->bind(EventStoreDb::class, function (Container $c) {
             return new EventStoreDb(
                 getenv('EVENT_STORE_DSN'),
@@ -50,32 +75,7 @@ class EventSourceryBootstrap implements ComponentBootstrap
             );
         });
 
-        $container->bind(DomainEventSerializer::class, function (Container $c) {
-            return new ReflectionBasedDomainEventSerializer(
-                $c->get(DomainEventClassMap::class),
-                $c->get(ValueSerializer::class),
-                $c->get(PersonalDataStore::class)
-            );
-        });
-
-        $container->singleton(ValueSerializer::class, function (Container $c) {
-            return new ValueSerializer($c->get(PersonalDataStore::class));
-        });
-
-        $container->singleton(EventDispatcher::class, function () use ($container) {
-            return new ImmediateEventDispatcher();
-        });
-
-
-
-        $container->singleton(ProjectionManager::class, function () {
-            return new ProjectionManager(Projections::make([]));
-        });
-
-        $container->bind(CommandBus::class, function (Container $c) {
-            return new ReflectionResolutionCommandBus($c);
-        });
-
+        // Data Store Configuration
         $container->singleton(EventStore::class, function () use ($container) {
             return new MonolithEventStore(
                 $container->get(DomainEventSerializer::class),

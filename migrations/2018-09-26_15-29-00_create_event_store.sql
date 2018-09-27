@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS event_store;
+
 CREATE TABLE event_store
 (
     id int PRIMARY KEY AUTO_INCREMENT,
