@@ -51,6 +51,10 @@ class MonolithPersonalDataStore implements PersonalDataStore
      */
     public function storeData(PersonalKey $personalKey, PersonalDataKey $dataKey, PersonalData $data): void
     {
+        if ( ! $this->cryptographyStore->hasPerson($personalKey)) {
+            $this->cryptographyStore->addPerson($personalKey);
+        }
+
         $crypto = $this->cryptographyStore->getCryptographyFor($personalKey);
 
         $this->db->write(
@@ -60,7 +64,7 @@ class MonolithPersonalDataStore implements PersonalDataStore
                 'data_key'                => $dataKey->toString(),
                 'encrypted_personal_data' => $this->encryption->encrypt($data, $crypto)->serialize(),
                 'encryption'              => $crypto->encryption(),
-                'stored_at'               => date('Y-m-d H:i:s')
+                'stored_at'               => date('Y-m-d H:i:s'),
             ]
         );
     }
@@ -82,7 +86,7 @@ class MonolithPersonalDataStore implements PersonalDataStore
             "select * from {$this->table} where data_key = :data_key and personal_key = :personal_key",
             [
                 'personal_key' => $personalKey->toString(),
-                'data_key' => $dataKey->toString(),
+                'data_key'     => $dataKey->toString(),
             ]
         );
 

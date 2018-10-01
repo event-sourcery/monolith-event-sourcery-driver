@@ -115,4 +115,12 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
         $details = (array) json_decode($crypto->cryptographic_details);
         return CryptographicDetails::deserialize($details);
     }
+
+    /**
+     * get the current encryption algorithm.
+     */
+    function getEncryption(): PersonalDataEncryption
+    {
+        return $this->encryption;
+    }
 }

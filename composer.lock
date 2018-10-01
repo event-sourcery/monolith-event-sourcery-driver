@@ -67,12 +67,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/event-sourcery/event-sourcery.git",
-                "reference": "30cb814482a3ca44062012344cffdbad8dbbbec0"
+                "reference": "dca25e46a09cd0579d66f8826d6df15ee7ba30f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/30cb814482a3ca44062012344cffdbad8dbbbec0",
-                "reference": "30cb814482a3ca44062012344cffdbad8dbbbec0",
+                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/dca25e46a09cd0579d66f8826d6df15ee7ba30f9",
+                "reference": "dca25e46a09cd0579d66f8826d6df15ee7ba30f9",
                 "shasum": ""
             },
             "require": {
@@ -107,7 +107,7 @@
                 "gdpr",
                 "reactive"
             ],
-            "time": "2018-09-30T19:46:04+00:00"
+            "time": "2018-10-01T11:27:46+00:00"
         },
         {
             "name": "monolith/collections",

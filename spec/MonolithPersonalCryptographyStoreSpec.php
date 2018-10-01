@@ -110,4 +110,9 @@ class MonolithPersonalCryptographyStoreSpec extends ObjectBehavior
 
         $this->shouldThrow(CanNotRetrieveCryptoForARemovedPerson::class)->during('getCryptographyFor', [$personalKey]);
     }
+
+    function it_can_provide_its_configured_encryption_algorithm()
+    {
+        $this->getEncryption()->shouldHaveType(PersonalDataEncryption::class);
+    }
 }
