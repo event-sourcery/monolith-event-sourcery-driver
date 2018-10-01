@@ -47,7 +47,37 @@ class EventSourceryBootstrap implements ComponentBootstrap
         $container->bind(PersonalDataEncryption::class, LibSodiumEncryption::class);
         $container->singleton(EventDispatcher::class, ImmediateEventDispatcher::class);
 
-        // Database Connection Configuration
+        // Data Store Configuration
+        $container->singleton(EventStore::class, MonolithEventStore::class);
+        $container->bind(MonolithEventStore::class, function (callable $r) {
+            return new MonolithEventStore(
+                $r(DomainEventSerializer::class),
+                $r(EventDispatcher::class),
+                $r(EventStoreDb::class)
+            );
+        });
+
+        $container->bind(MonolithPersonalDataStore::class, function (callable $r) {
+            return new MonolithPersonalDataStore(
+                $r(PersonalCryptographyStore::class),
+                $r(PersonalDataEncryption::class),
+                $r(PersonalDataStoreDb::class)
+            );
+        });
+        $container->singleton(PersonalDataStore::class, MonolithPersonalDataStore::class);
+
+        $container->bind(MonolithPersonalCryptographyStore::class, function (callable $r) {
+            return new MonolithPersonalCryptographyStore(
+                $r(PersonalDataEncryption::class),
+                $r(PersonalCryptographyStoreDb::class)
+            );
+        });
+        $container->singleton(PersonalCryptographyStore::class, MonolithPersonalCryptographyStore::class);
+    }
+
+    public function init(Container $container): void
+    {
+        // Database Connection Configuration relies on env configuration
         $container->bind(EventStoreDb::class, function (callable $r) {
             try {
                 return new EventStoreDb(
@@ -84,36 +114,7 @@ class EventSourceryBootstrap implements ComponentBootstrap
             }
         });
 
-        // Data Store Configuration
-        $container->singleton(EventStore::class, MonolithEventStore::class);
-        $container->bind(MonolithEventStore::class, function (callable $r) {
-            return new MonolithEventStore(
-                $r(DomainEventSerializer::class),
-                $r(EventDispatcher::class),
-                $r(EventStoreDb::class)
-            );
-        });
-
-        $container->bind(MonolithPersonalDataStore::class, function (callable $r) {
-            return new MonolithPersonalDataStore(
-                $r(PersonalCryptographyStore::class),
-                $r(PersonalDataEncryption::class),
-                $r(PersonalDataStoreDb::class)
-            );
-        });
-        $container->singleton(PersonalDataStore::class, MonolithPersonalDataStore::class);
-
-        $container->bind(MonolithPersonalCryptographyStore::class, function (callable $r) {
-            return new MonolithPersonalCryptographyStore(
-                $r(PersonalDataEncryption::class),
-                $r(PersonalCryptographyStoreDb::class)
-            );
-        });
-        $container->singleton(PersonalCryptographyStore::class, MonolithPersonalCryptographyStore::class);
-    }
-
-    public function init(Container $container): void
-    {
+        // event dispatcher configuration
         $dispatcher = $container->get(EventDispatcher::class);
 
         $dispatcher->addListener($container->get(ProjectionManager::class));
