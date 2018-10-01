@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS personal_data_store;
+
 CREATE TABLE personal_data_store
 (
     id int PRIMARY KEY AUTO_INCREMENT,

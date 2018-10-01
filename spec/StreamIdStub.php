@@ -2,4 +2,7 @@
 
 use EventSourcery\EventSourcery\EventSourcing\StreamId;
 
-final class IdStub extends StreamId {}
+final class StreamIdStub extends StreamId
+{
+
+}

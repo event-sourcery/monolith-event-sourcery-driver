@@ -1,6 +1,5 @@
 <?php namespace EventSourcery\Monolith;
 
-use EventSourcery\EventSourcery\PersonalData\CanNotFindCryptographyForPerson;
 use EventSourcery\EventSourcery\PersonalData\CouldNotFindCryptographyForPerson;
 use EventSourcery\EventSourcery\PersonalData\CryptographicDetails;
 use EventSourcery\EventSourcery\PersonalData\EncryptionKeyGenerator;
@@ -36,10 +35,16 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      *
      * @param PersonalKey $person
      * @param CryptographicDetails $crypto
+     * @throws CanNotRetrieveCryptographyFromARemovedPerson
      * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
+     * @throws CanNotAddCryptoPersonAlreadyHasCrypto
      */
     function addPerson(PersonalKey $person, CryptographicDetails $crypto): void
     {
+        if ($this->hasPerson($person)) {
+            throw new CanNotAddCryptoPersonAlreadyHasCrypto($person->toString());
+        }
+
         $this->db->write(
             "insert into {$this->table} (personal_key, cryptographic_details, encryption, added_at) values(:personal_key, :cryptographic_details, :encryption, :added_at)",
             [
@@ -51,32 +56,16 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
         );
     }
 
-    /**
-     * get cryptography details for a person (identified by personal key)
-     *
-     * @param PersonalKey $person
-     * @throws CanNotFindCryptographyForPerson
-     * @return CryptographicDetails
-     * @throws \EventSourcery\EventSourcery\PersonalData\CannotDeserializeCryptographicDetails
-     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
-     */
-    function getCryptographyFor(PersonalKey $person): CryptographicDetails
+    function hasPerson(PersonalKey $person): bool
     {
-        $crypto = $this->db->readOne(
+        $crypto = $this->db->readFirst(
             "select * from {$this->table} where personal_key = :personal_key",
             [
                 'personal_key' => $person->toString(),
             ]
         );
 
-        if ( ! $crypto) {
-            $this->addPerson($person, $this->encryption->generateCryptographicDetails());
-            return $this->getCryptographyFor($person);
-        }
-
-        $details = (array) json_decode($crypto->cryptographic_details);
-
-        return CryptographicDetails::deserialize($details);
+        return $crypto && isset($crypto->cryptographic_details);
     }
 
     /**
@@ -94,5 +83,36 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
                 'cleared_at'   => date('Y-m-d H:i:s'),
             ]
         );
+    }
+
+    /**
+     * get cryptography details for a person (identified by personal key)
+     *
+     * @param PersonalKey $person
+     * @return CryptographicDetails
+     * @throws \EventSourcery\EventSourcery\PersonalData\CannotDeserializeCryptographicDetails
+     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
+     * @throws CanNotRetrieveCryptographyFromARemovedPerson
+     * @throws CryptoCouldNotBeFoundForPerson
+     * @throws CanNotRetrieveCryptoForARemovedPerson
+     */
+    public function getCryptographyFor(PersonalKey $person): CryptographicDetails
+    {
+        if ( ! $this->hasPerson($person)) {
+            throw new CryptoCouldNotBeFoundForPerson($person->toString());
+        }
+
+        $crypto = $this->db->readFirst(
+            "select * from {$this->table} where personal_key = :personal_key",
+            [
+                'personal_key' => $person->toString(),
+            ]
+        );
+
+        if (empty($crypto->cryptographic_details)) {
+            throw new CanNotRetrieveCryptoForARemovedPerson;
+        }
+        $details = (array) json_decode($crypto->cryptographic_details);
+        return CryptographicDetails::deserialize($details);
     }
 }

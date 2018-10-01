@@ -17,6 +17,7 @@
   "require": {
     "php": "^7.2",
     "event-sourcery/event-sourcery": "dev-master",
+    "monolith/dependency-injection": "^5",
     "monolith/collections": "^2",
     "monolith/component-bootstrapping": "^4",
     "monolith/configuration": "^2",

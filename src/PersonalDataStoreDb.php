@@ -2,7 +2,4 @@
 
 use Monolith\RelationalDatabase\Db;
 
-final class PersonalDataStoreDb extends Db
-{
-
-}
+final class PersonalDataStoreDb extends Db {}

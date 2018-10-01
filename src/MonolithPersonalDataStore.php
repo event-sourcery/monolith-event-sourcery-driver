@@ -40,39 +40,6 @@ class MonolithPersonalDataStore implements PersonalDataStore
     }
 
     /**
-     * retrieve data from the personal data store based on a personal key and data key.
-     *
-     * @param PersonalKey $personalKey
-     * @param PersonalDataKey $dataKey
-     * @return PersonalData
-     * @throws CanNotFindPersonalDataByKey
-     * @throws \EventSourcery\EventSourcery\PersonalData\CryptographicDetailsDoNotContainKey
-     * @throws \EventSourcery\EventSourcery\PersonalData\CryptographicDetailsNotCompatibleWithEncryption
-     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
-     */
-    public function retrieveData(PersonalKey $personalKey, PersonalDataKey $dataKey): PersonalData
-    {
-        $data = $this->db->readOne(
-            "select * from {$this->table} where data_key = :data_key and personal_key = :personal_key",
-            [
-                'personal_key' => $personalKey->toString(),
-                'data_key' => $dataKey->toString(),
-            ]
-        );
-
-        if ( ! $data) {
-            throw new CanNotFindPersonalDataByKey($dataKey->toString());
-        }
-
-        $decrypted = $this->encryption->decrypt(
-            EncryptedPersonalData::deserialize($data->encrypted_personal_data),
-            $this->cryptographyStore->getCryptographyFor($personalKey)
-        )->toString();
-
-        return PersonalData::fromString($decrypted);
-    }
-
-    /**
      * store data in the personal data store identified by a personal key and a data key
      *
      * @param PersonalKey $personalKey
@@ -99,6 +66,39 @@ class MonolithPersonalDataStore implements PersonalDataStore
     }
 
     /**
+     * retrieve data from the personal data store based on a personal key and data key.
+     *
+     * @param PersonalKey $personalKey
+     * @param PersonalDataKey $dataKey
+     * @return PersonalData
+     * @throws CanNotFindPersonalDataByKey
+     * @throws \EventSourcery\EventSourcery\PersonalData\CryptographicDetailsDoNotContainKey
+     * @throws \EventSourcery\EventSourcery\PersonalData\CryptographicDetailsNotCompatibleWithEncryption
+     * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
+     */
+    public function retrieveData(PersonalKey $personalKey, PersonalDataKey $dataKey): PersonalData
+    {
+        $data = $this->db->readFirst(
+            "select * from {$this->table} where data_key = :data_key and personal_key = :personal_key",
+            [
+                'personal_key' => $personalKey->toString(),
+                'data_key' => $dataKey->toString(),
+            ]
+        );
+
+        if ( ! $data) {
+            throw new CanNotFindPersonalDataByKey($dataKey->toString());
+        }
+
+        $decrypted = $this->encryption->decrypt(
+            EncryptedPersonalData::deserialize($data->encrypted_personal_data),
+            $this->cryptographyStore->getCryptographyFor($personalKey)
+        )->toString();
+
+        return PersonalData::fromString($decrypted);
+    }
+
+    /**
      * remove all data for a person from the data store
      *
      * @param PersonalKey $personalKey
@@ -109,7 +109,7 @@ class MonolithPersonalDataStore implements PersonalDataStore
         $this->db->write(
             "delete from {$this->table} where personal_key = :personal_key",
             [
-                'personal_key' => $personalKey->serialize(),
+                'personal_key' => $personalKey->toString(),
             ]
         );
     }

@@ -2,17 +2,20 @@
 
 use EventSourcery\EventSourcery\EventDispatch\EventDispatcher;
 use EventSourcery\EventSourcery\EventSourcing\DomainEventClassMap;
+use EventSourcery\EventSourcery\EventSourcing\DomainEvents;
+use EventSourcery\EventSourcery\EventSourcing\StreamEvent;
 use EventSourcery\EventSourcery\EventSourcing\StreamEvents;
-use EventSourcery\EventSourcery\EventSourcing\StreamId;
+use EventSourcery\EventSourcery\EventSourcing\StreamVersion;
 use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
 use EventSourcery\Monolith\EventSourceryBootstrap;
 use EventSourcery\Monolith\EventStoreDb;
 use EventSourcery\Monolith\MonolithEventStore;
+use EventSourcery\Monolith\PersonalCryptographyStoreDb;
+use EventSourcery\Monolith\PersonalDataStoreDb;
 use Monolith\ComponentBootstrapping\ComponentLoader;
 use Monolith\Configuration\ConfigurationBootstrap;
 use Monolith\DependencyInjection\Container;
 use PhpSpec\ObjectBehavior;
-use Ramsey\Uuid\Uuid;
 
 class MonolithEventStoreSpec extends ObjectBehavior
 {
@@ -39,19 +42,21 @@ class MonolithEventStoreSpec extends ObjectBehavior
             $container->get(EventStoreDb::class)
         );
 
+        $this->shouldHaveType(MonolithEventStore::class);
+
         // event name / class bindings
         $classMap = $container->get(DomainEventClassMap::class);
         $classMap->add('spec/DomainEventStub', DomainEventStub::class);
 
-        // clear event store
-        /** @var EventStoreDb $db */
-        $db = $container->get(EventStoreDb::class);
-        $db->write(file_get_contents('migrations/2018-09-26_15-29-00_create_event_store.sql'));
-    }
+        // migrations
+        $db = $container->get(PersonalDataStoreDb::class);
+        $db->write(file_get_contents('migrations/create_personal_data_store.sql'));
 
-    function letGo()
-    {
-        // clean up
+        $db = $container->get(PersonalCryptographyStoreDb::class);
+        $db->write(file_get_contents('migrations/create_personal_cryptography_store.sql'));
+
+        $db = $container->get(EventStoreDb::class);
+        $db->write(file_get_contents('migrations/create_event_store.sql'));
     }
 
     function it_is_initializable()
@@ -59,18 +64,46 @@ class MonolithEventStoreSpec extends ObjectBehavior
         $this->shouldHaveType(MonolithEventStore::class);
     }
 
-    function it_can_store_events() {
+    function it_can_store_events()
+    {
+        /** @var StreamEvents $stream */
 
         $id = IdStub::generate();
+
+        // store an event stub
         $this->storeEvent(new DomainEventStub($id));
 
+        // query
+        $events = $this->getEvents(1, 0);
+
+        // get back domain events collection
+        $events->shouldHaveType(DomainEvents::class);
+
+        // the event should be of the correct type
+        $event = $events->first();
+        $event->shouldHaveType(DomainEventStub::class);
+
+        // the id should be the same
+        $event->id->equals($id);
+    }
+
+    function it_can_store_event_streams()
+    {
+        $id = IdStub::generate();
+
+        $this->storeStream(StreamEvents::make([
+            new StreamEvent($id, StreamVersion::zero(), new DomainEventStub($id)),
+        ]));
+
         /** @var StreamEvents $stream */
-        $stream = $this->getStream(StreamId::fromString('0'));
+        $stream = $this->getStream($id);
 
         $stream->shouldHaveType(StreamEvents::class);
-        $event = $stream->first()->event();
+        $stream->first()->shouldHaveType(StreamEvent::class);
 
+        $event = $stream->first()->event();
         $event->shouldHaveType(DomainEventStub::class);
-        $event->id->equals($id);
+
+        $event->id->equals($id)->shouldBe(true);
     }
 }

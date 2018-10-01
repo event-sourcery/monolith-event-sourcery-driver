@@ -109,8 +109,9 @@ class MonolithEventStore implements EventStore
         $eventData = $this->getRawEvents($take, $skip);
 
         $events = $eventData->map(function ($e) {
-            $e->event_data = json_decode($e->event_data, true);
-            return $this->serializer->deserialize($e);
+            return $this->serializer->deserialize(
+                json_decode($e->event_data, true)
+            );
         })->toArray();
 
         return DomainEvents::make($events);
@@ -144,11 +145,7 @@ class MonolithEventStore implements EventStore
     private function getRawEvents($take = 0, $skip = 0): Collection
     {
         return new Collection($this->db->readAll(
-            "SELECT * FROM {$this->table} WHERE order by id asc limit :take offset :skip",
-            [
-                'take'  => $take,
-                'skip'  => $skip,
-            ]
+            "select * from {$this->table} order by id asc limit {$skip}, {$take}"
         ));
     }
 

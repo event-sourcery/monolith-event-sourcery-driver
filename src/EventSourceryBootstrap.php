@@ -23,8 +23,8 @@ class EventSourceryBootstrap implements ComponentBootstrap
     public function bind(Container $container): void
     {
         // CQRS
-        $container->bind(CommandBus::class, function (Container $c) {
-            return new ReflectionResolutionCommandBus($c);
+        $container->bind(CommandBus::class, function (callable $r) use ($container) {
+            return new ReflectionResolutionCommandBus($container);
         });
 
         $container->singleton(ProjectionManager::class, function () {
@@ -34,16 +34,12 @@ class EventSourceryBootstrap implements ComponentBootstrap
         // Domain Event Serialization
         $container->singleton(DomainEventClassMap::class);
 
-        $container->bind(DomainEventSerializer::class, function (Container $c) {
+        $container->bind(DomainEventSerializer::class, function (callable $r) {
             return new ReflectionBasedDomainEventSerializer(
-                $c->get(DomainEventClassMap::class),
-                $c->get(ValueSerializer::class),
-                $c->get(PersonalDataStore::class)
+                $r(DomainEventClassMap::class),
+                $r(ValueSerializer::class),
+                $r(PersonalDataStore::class)
             );
-        });
-
-        $container->singleton(ValueSerializer::class, function (Container $c) {
-            return new ValueSerializer($c->get(PersonalDataStore::class));
         });
 
         // Implementation Binding
@@ -51,7 +47,7 @@ class EventSourceryBootstrap implements ComponentBootstrap
         $container->singleton(EventDispatcher::class, ImmediateEventDispatcher::class);
 
         // Database Connection Configuration
-        $container->bind(EventStoreDb::class, function (Container $c) {
+        $container->bind(EventStoreDb::class, function (callable $r) {
             return new EventStoreDb(
                 getenv('EVENT_STORE_DSN'),
                 getenv('EVENT_STORE_USERNAME'),
@@ -59,7 +55,7 @@ class EventSourceryBootstrap implements ComponentBootstrap
             );
         });
 
-        $container->bind(PersonalDataStoreDb::class, function (Container $c) {
+        $container->bind(PersonalDataStoreDb::class, function (callable $r) {
             return new PersonalDataStoreDb(
                 getenv('PERSONAL_DATA_STORE_DSN'),
                 getenv('PERSONAL_DATA_STORE_USERNAME'),
@@ -67,7 +63,7 @@ class EventSourceryBootstrap implements ComponentBootstrap
             );
         });
 
-        $container->bind(PersonalCryptographyStoreDb::class, function (Container $c) {
+        $container->bind(PersonalCryptographyStoreDb::class, function (callable $r) {
             return new PersonalCryptographyStoreDb(
                 getenv('PERSONAL_CRYPTOGRAPHY_STORE_DSN'),
                 getenv('PERSONAL_CRYPTOGRAPHY_STORE_USERNAME'),
@@ -76,28 +72,31 @@ class EventSourceryBootstrap implements ComponentBootstrap
         });
 
         // Data Store Configuration
-        $container->singleton(EventStore::class, function () use ($container) {
+        $container->singleton(EventStore::class, MonolithEventStore::class);
+        $container->bind(MonolithEventStore::class, function (callable $r) {
             return new MonolithEventStore(
-                $container->get(DomainEventSerializer::class),
-                $container->get(EventDispatcher::class),
-                $container->get(EventStoreDb::class)
+                $r(DomainEventSerializer::class),
+                $r(EventDispatcher::class),
+                $r(EventStoreDb::class)
             );
         });
 
-        $container->bind(PersonalDataStore::class, function (Container $c) {
+        $container->bind(MonolithPersonalDataStore::class, function (callable $r) {
             return new MonolithPersonalDataStore(
-                $c->get(PersonalCryptographyStore::class),
-                $c->get(PersonalDataEncryption::class),
-                $c->get(PersonalDataStoreDb::class)
+                $r(PersonalCryptographyStore::class),
+                $r(PersonalDataEncryption::class),
+                $r(PersonalDataStoreDb::class)
             );
         });
+        $container->singleton(PersonalDataStore::class, MonolithPersonalDataStore::class);
 
-        $container->bind(PersonalCryptographyStore::class, function (Container $c) {
+        $container->bind(MonolithPersonalCryptographyStore::class, function (callable $r) {
             return new MonolithPersonalCryptographyStore(
-                $c->get(PersonalDataEncryption::class),
-                $c->get(PersonalCryptographyStoreDb::class)
+                $r(PersonalDataEncryption::class),
+                $r(PersonalCryptographyStoreDb::class)
             );
         });
+        $container->singleton(PersonalCryptographyStore::class, MonolithPersonalCryptographyStore::class);
     }
 
     public function init(Container $container): void
