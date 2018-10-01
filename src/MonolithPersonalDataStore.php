@@ -52,7 +52,7 @@ class MonolithPersonalDataStore implements PersonalDataStore
     public function storeData(PersonalKey $personalKey, PersonalDataKey $dataKey, PersonalData $data): void
     {
         if ( ! $this->cryptographyStore->hasPerson($personalKey)) {
-            $this->cryptographyStore->addPerson($personalKey);
+            $this->cryptographyStore->addPerson($personalKey, $this->cryptographyStore->getEncryption()->generateCryptographicDetails());
         }
 
         $crypto = $this->cryptographyStore->getCryptographyFor($personalKey);

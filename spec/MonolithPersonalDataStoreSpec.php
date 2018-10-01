@@ -121,4 +121,17 @@ class MonolithPersonalDataStoreSpec extends ObjectBehavior
         $this->shouldThrow(CanNotFindPersonalDataByKey::class)->during('retrieveData', [$personalKey, $dataKey]);
         $this->shouldThrow(CanNotFindPersonalDataByKey::class)->during('retrieveData', [$personalKey, $dataKeyTwo]);
     }
+
+    function it_will_automatically_add_personal_cryptography_if_needed_when_storing_data()
+    {
+        $personalKey = PersonalKey::fromString('hats');
+        $dataKey = PersonalDataKey::generate();
+        $data = PersonalData::fromString("shawn mccool");
+
+        $this->storeData($personalKey, $dataKey, $data);
+
+        $cryptoStore = $this->container->get(PersonalCryptographyStore::class);
+
+        $cryptoStore->getCryptographyFor($personalKey);
+    }
 }
