@@ -237,16 +237,16 @@
         },
         {
             "name": "monolith/dependency-injection",
-            "version": "5.9",
+            "version": "5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monolith-php/dependency-injection.git",
-                "reference": "44b731d9aab4c12d6e327caf521fc878e2388420"
+                "reference": "32f8e5ca333c8cf5852467da4d09b0329e3eb619"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/dependency-injection/zipball/44b731d9aab4c12d6e327caf521fc878e2388420",
-                "reference": "44b731d9aab4c12d6e327caf521fc878e2388420",
+                "url": "https://api.github.com/repos/monolith-php/dependency-injection/zipball/32f8e5ca333c8cf5852467da4d09b0329e3eb619",
+                "reference": "32f8e5ca333c8cf5852467da4d09b0329e3eb619",
                 "shasum": ""
             },
             "require": {
@@ -277,23 +277,24 @@
                 "dependency injection",
                 "monolith"
             ],
-            "time": "2018-10-01T08:31:03+00:00"
+            "time": "2018-10-01T09:17:06+00:00"
         },
         {
             "name": "monolith/relational-database",
-            "version": "5.0",
+            "version": "5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monolith-php/relational-database.git",
-                "reference": "6ab1974cf02dc698bdd187d6a0d69a23245ea1d3"
+                "reference": "071ff6908b36573437c181e4cb52741a2c07dcf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/relational-database/zipball/6ab1974cf02dc698bdd187d6a0d69a23245ea1d3",
-                "reference": "6ab1974cf02dc698bdd187d6a0d69a23245ea1d3",
+                "url": "https://api.github.com/repos/monolith-php/relational-database/zipball/071ff6908b36573437c181e4cb52741a2c07dcf0",
+                "reference": "071ff6908b36573437c181e4cb52741a2c07dcf0",
                 "shasum": ""
             },
             "require": {
+                "monolith/dependency-injection": "^5",
                 "php": "^7.1",
                 "vlucas/phpdotenv": "^2.5@dev"
             },
@@ -318,7 +319,7 @@
                 "http",
                 "monolith"
             ],
-            "time": "2018-09-27T12:07:52+00:00"
+            "time": "2018-10-01T09:40:55+00:00"
         },
         {
             "name": "paragonie/random_compat",

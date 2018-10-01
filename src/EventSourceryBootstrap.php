@@ -17,6 +17,7 @@ use EventSourcery\EventSourcery\StreamProcessing\ProjectionManager;
 use EventSourcery\EventSourcery\StreamProcessing\Projections;
 use Monolith\ComponentBootstrapping\ComponentBootstrap;
 use Monolith\DependencyInjection\Container;
+use Monolith\RelationalDatabase\CouldNotConnectWithPdo;
 
 class EventSourceryBootstrap implements ComponentBootstrap
 {
@@ -48,27 +49,39 @@ class EventSourceryBootstrap implements ComponentBootstrap
 
         // Database Connection Configuration
         $container->bind(EventStoreDb::class, function (callable $r) {
-            return new EventStoreDb(
-                getenv('EVENT_STORE_DSN'),
-                getenv('EVENT_STORE_USERNAME'),
-                getenv('EVENT_STORE_PASSWORD')
-            );
+            try {
+                return new EventStoreDb(
+                    getenv('EVENT_STORE_DSN'),
+                    getenv('EVENT_STORE_USERNAME'),
+                    getenv('EVENT_STORE_PASSWORD')
+                );
+            } catch (CouldNotConnectWithPdo $e) {
+                throw CouldNotConnectToDatabase::fromPdoException($e);
+            }
         });
 
         $container->bind(PersonalDataStoreDb::class, function (callable $r) {
-            return new PersonalDataStoreDb(
-                getenv('PERSONAL_DATA_STORE_DSN'),
-                getenv('PERSONAL_DATA_STORE_USERNAME'),
-                getenv('PERSONAL_DATA_STORE_PASSWORD')
-            );
+            try {
+                return new PersonalDataStoreDb(
+                    getenv('PERSONAL_DATA_STORE_DSN'),
+                    getenv('PERSONAL_DATA_STORE_USERNAME'),
+                    getenv('PERSONAL_DATA_STORE_PASSWORD')
+                );
+            } catch (CouldNotConnectWithPdo $e) {
+                throw CouldNotConnectToDatabase::fromPdoException($e);
+            }
         });
 
         $container->bind(PersonalCryptographyStoreDb::class, function (callable $r) {
-            return new PersonalCryptographyStoreDb(
-                getenv('PERSONAL_CRYPTOGRAPHY_STORE_DSN'),
-                getenv('PERSONAL_CRYPTOGRAPHY_STORE_USERNAME'),
-                getenv('PERSONAL_CRYPTOGRAPHY_STORE_PASSWORD')
-            );
+            try {
+                return new PersonalCryptographyStoreDb(
+                    getenv('PERSONAL_CRYPTOGRAPHY_STORE_DSN'),
+                    getenv('PERSONAL_CRYPTOGRAPHY_STORE_USERNAME'),
+                    getenv('PERSONAL_CRYPTOGRAPHY_STORE_PASSWORD')
+                );
+            } catch (CouldNotConnectWithPdo $e) {
+                throw CouldNotConnectToDatabase::fromPdoException($e);
+            }
         });
 
         // Data Store Configuration
