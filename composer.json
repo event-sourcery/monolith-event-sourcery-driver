@@ -22,7 +22,9 @@
     "monolith/configuration": "^2",
     "monolith/dependency-injection": "^5",
     "monolith/relational-database": "^5",
-    "psr/container": "1.0.0",
+    "psr/container": "1.0.0"
+  },
+  "require-dev": {
     "ramsey/uuid": "^3"
   },
   "autoload": {
