@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5fcd75c7a6120dd52c943094bdc38272",
+    "content-hash": "e3f921a1ab760fcfa532a364b1943d97",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -67,19 +67,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/event-sourcery/event-sourcery.git",
-                "reference": "dca25e46a09cd0579d66f8826d6df15ee7ba30f9"
+                "reference": "f46329a8d3423640fac8bfa9b317b9891ce0c3bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/dca25e46a09cd0579d66f8826d6df15ee7ba30f9",
-                "reference": "dca25e46a09cd0579d66f8826d6df15ee7ba30f9",
+                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/f46329a8d3423640fac8bfa9b317b9891ce0c3bf",
+                "reference": "f46329a8d3423640fac8bfa9b317b9891ce0c3bf",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1",
                 "phpspec/phpspec": "^4.0.3",
                 "psr/container": "^1",
-                "ramsey/uuid": "^3.7"
+                "ramsey/uuid": "^3"
             },
             "type": "library",
             "autoload": {
@@ -107,20 +107,20 @@
                 "gdpr",
                 "reactive"
             ],
-            "time": "2018-10-01T11:27:46+00:00"
+            "time": "2018-10-03T10:22:59+00:00"
         },
         {
             "name": "monolith/collections",
-            "version": "2.1",
+            "version": "2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monolith-php/collections.git",
-                "reference": "c9108757cc498eb4eb2e33e4a920dca4c724e758"
+                "reference": "78c0bbab032c8c42bfb111ba0d0c74615b2c998a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/collections/zipball/c9108757cc498eb4eb2e33e4a920dca4c724e758",
-                "reference": "c9108757cc498eb4eb2e33e4a920dca4c724e758",
+                "url": "https://api.github.com/repos/monolith-php/collections/zipball/78c0bbab032c8c42bfb111ba0d0c74615b2c998a",
+                "reference": "78c0bbab032c8c42bfb111ba0d0c74615b2c998a",
                 "shasum": ""
             },
             "require": {
@@ -151,7 +151,7 @@
                 "collections",
                 "monolith"
             ],
-            "time": "2018-09-22T13:41:18+00:00"
+            "time": "2018-10-03T09:56:10+00:00"
         },
         {
             "name": "monolith/component-bootstrapping",
@@ -237,16 +237,16 @@
         },
         {
             "name": "monolith/dependency-injection",
-            "version": "5.10",
+            "version": "5.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monolith-php/dependency-injection.git",
-                "reference": "32f8e5ca333c8cf5852467da4d09b0329e3eb619"
+                "reference": "17b9abd55ce8a6e080399b40897f11f172cfe392"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/dependency-injection/zipball/32f8e5ca333c8cf5852467da4d09b0329e3eb619",
-                "reference": "32f8e5ca333c8cf5852467da4d09b0329e3eb619",
+                "url": "https://api.github.com/repos/monolith-php/dependency-injection/zipball/17b9abd55ce8a6e080399b40897f11f172cfe392",
+                "reference": "17b9abd55ce8a6e080399b40897f11f172cfe392",
                 "shasum": ""
             },
             "require": {
@@ -277,7 +277,7 @@
                 "dependency injection",
                 "monolith"
             ],
-            "time": "2018-10-01T09:17:06+00:00"
+            "time": "2018-10-03T09:34:26+00:00"
         },
         {
             "name": "monolith/relational-database",
@@ -1078,12 +1078,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "35352535fdc38f35c29773662e3b3f2827864a6f"
+                "reference": "e0c9878432059f2c1cce8ebddb0f41271a9ee1ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/35352535fdc38f35c29773662e3b3f2827864a6f",
-                "reference": "35352535fdc38f35c29773662e3b3f2827864a6f",
+                "url": "https://api.github.com/repos/symfony/console/zipball/e0c9878432059f2c1cce8ebddb0f41271a9ee1ff",
+                "reference": "e0c9878432059f2c1cce8ebddb0f41271a9ee1ff",
                 "shasum": ""
             },
             "require": {
@@ -1139,7 +1139,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-01T05:27:16+00:00"
+            "time": "2018-10-03T08:52:36+00:00"
         },
         {
             "name": "symfony/contracts",
@@ -1279,12 +1279,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "702027a78f328eef5e33f6299f591e5f741a6b1e"
+                "reference": "d4a70c32d561ce1f75202af8b39d56825bc870bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/702027a78f328eef5e33f6299f591e5f741a6b1e",
-                "reference": "702027a78f328eef5e33f6299f591e5f741a6b1e",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/d4a70c32d561ce1f75202af8b39d56825bc870bc",
+                "reference": "d4a70c32d561ce1f75202af8b39d56825bc870bc",
                 "shasum": ""
             },
             "require": {
@@ -1320,7 +1320,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-01T05:27:16+00:00"
+            "time": "2018-10-03T08:52:36+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1445,12 +1445,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "9e0696863b7f72c976e8dcbf92a4bad7f3253458"
+                "reference": "a867125524205460164c9ca95bc08199bb2da198"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/9e0696863b7f72c976e8dcbf92a4bad7f3253458",
-                "reference": "9e0696863b7f72c976e8dcbf92a4bad7f3253458",
+                "url": "https://api.github.com/repos/symfony/process/zipball/a867125524205460164c9ca95bc08199bb2da198",
+                "reference": "a867125524205460164c9ca95bc08199bb2da198",
                 "shasum": ""
             },
             "require": {
@@ -1486,7 +1486,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-01T05:27:16+00:00"
+            "time": "2018-10-02T12:43:31+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -1494,12 +1494,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "2dff4e32b63fb9bcae49ae2ce77a3a74c69d798a"
+                "reference": "7228a3e2163ab5623231f126cf8d7701072f9d16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/2dff4e32b63fb9bcae49ae2ce77a3a74c69d798a",
-                "reference": "2dff4e32b63fb9bcae49ae2ce77a3a74c69d798a",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/7228a3e2163ab5623231f126cf8d7701072f9d16",
+                "reference": "7228a3e2163ab5623231f126cf8d7701072f9d16",
                 "shasum": ""
             },
             "require": {
@@ -1545,7 +1545,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-01T05:27:16+00:00"
+            "time": "2018-10-02T16:38:08+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
