@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d185163308600cc75bc3338242ae28c7",
+    "content-hash": "aa9a244d3523f934c096fd1f8a4c1a68",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -63,7 +63,7 @@
         },
         {
             "name": "event-sourcery/event-sourcery",
-            "version": "dev-master",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/event-sourcery/event-sourcery.git",
@@ -111,16 +111,16 @@
         },
         {
             "name": "monolith/collections",
-            "version": "2.2",
+            "version": "3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monolith-php/collections.git",
-                "reference": "78c0bbab032c8c42bfb111ba0d0c74615b2c998a"
+                "reference": "938f42021ac626e2b17f727bbfadfed510c65c3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/collections/zipball/78c0bbab032c8c42bfb111ba0d0c74615b2c998a",
-                "reference": "78c0bbab032c8c42bfb111ba0d0c74615b2c998a",
+                "url": "https://api.github.com/repos/monolith-php/collections/zipball/938f42021ac626e2b17f727bbfadfed510c65c3f",
+                "reference": "938f42021ac626e2b17f727bbfadfed510c65c3f",
                 "shasum": ""
             },
             "require": {
@@ -151,26 +151,29 @@
                 "collections",
                 "monolith"
             ],
-            "time": "2018-10-03T09:56:10+00:00"
+            "time": "2018-10-04T12:11:31+00:00"
         },
         {
             "name": "monolith/component-bootstrapping",
-            "version": "4.3",
+            "version": "4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monolith-php/component-bootstrapping.git",
-                "reference": "5cf850272db9ddb64dfb5b7680ea3296005c6174"
+                "reference": "1d9d3a581ed1cfce55f8abd44951fea0551c28dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/component-bootstrapping/zipball/5cf850272db9ddb64dfb5b7680ea3296005c6174",
-                "reference": "5cf850272db9ddb64dfb5b7680ea3296005c6174",
+                "url": "https://api.github.com/repos/monolith-php/component-bootstrapping/zipball/1d9d3a581ed1cfce55f8abd44951fea0551c28dc",
+                "reference": "1d9d3a581ed1cfce55f8abd44951fea0551c28dc",
                 "shasum": ""
             },
             "require": {
-                "monolith/collections": ">=2",
-                "monolith/dependency-injection": ">=4",
+                "monolith/collections": "^3",
+                "monolith/dependency-injection": "^5",
                 "php": "^7.1"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^5.0"
             },
             "type": "library",
             "autoload": {
@@ -190,11 +193,11 @@
                 "component bootstrapping",
                 "monolith"
             ],
-            "time": "2018-09-26T10:04:59+00:00"
+            "time": "2018-10-04T12:30:48+00:00"
         },
         {
             "name": "monolith/configuration",
-            "version": "2.7",
+            "version": "2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monolith-php/configuration.git",
@@ -237,20 +240,20 @@
         },
         {
             "name": "monolith/dependency-injection",
-            "version": "5.11",
+            "version": "5.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monolith-php/dependency-injection.git",
-                "reference": "17b9abd55ce8a6e080399b40897f11f172cfe392"
+                "reference": "2c89f82d44d8ec1c15e3152309375104a339fcf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/dependency-injection/zipball/17b9abd55ce8a6e080399b40897f11f172cfe392",
-                "reference": "17b9abd55ce8a6e080399b40897f11f172cfe392",
+                "url": "https://api.github.com/repos/monolith-php/dependency-injection/zipball/2c89f82d44d8ec1c15e3152309375104a339fcf6",
+                "reference": "2c89f82d44d8ec1c15e3152309375104a339fcf6",
                 "shasum": ""
             },
             "require": {
-                "monolith/collections": "^2",
+                "monolith/collections": "^3",
                 "php": "^7.1",
                 "psr/container": "^1"
             },
@@ -277,11 +280,11 @@
                 "dependency injection",
                 "monolith"
             ],
-            "time": "2018-10-03T09:34:26+00:00"
+            "time": "2018-10-04T12:19:38+00:00"
         },
         {
             "name": "monolith/relational-database",
-            "version": "5.1",
+            "version": "5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monolith-php/relational-database.git",
@@ -1651,9 +1654,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "event-sourcery/event-sourcery": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
