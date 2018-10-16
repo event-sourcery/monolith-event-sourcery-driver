@@ -40,7 +40,8 @@ Vagrant.configure("2") do |config|
 
             install_ohmyzsh: "yes",
             enable_swap: "yes",
-            swap_size_in_mb: "1024"
+            swap_size_in_mb: "1024",
+            install_rabbit_mq: "yes"
         }
     end
 end
