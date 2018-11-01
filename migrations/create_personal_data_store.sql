@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS personal_data_store;
-
 CREATE TABLE personal_data_store
 (
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -10,5 +8,3 @@ CREATE TABLE personal_data_store
     stored_at datetime,
     cleared_at datetime
 );
-
-ALTER TABLE personal_data_store COMMENT = 'event sourcery personal data store';

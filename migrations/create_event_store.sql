@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS event_store;
-
 CREATE TABLE event_store
 (
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -10,5 +8,3 @@ CREATE TABLE event_store
     meta_data text,
     raised_at datetime
 );
-
-ALTER TABLE event_store COMMENT = 'event sourcery domain event store';

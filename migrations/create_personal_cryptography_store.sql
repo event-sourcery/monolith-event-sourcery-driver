@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS personal_cryptography_store;
-
 CREATE TABLE personal_cryptography_store
 (
     id int PRIMARY KEY AUTO_INCREMENT,
@@ -9,5 +7,3 @@ CREATE TABLE personal_cryptography_store
     added_at datetime,
     cleared_at datetime
 );
-
-ALTER TABLE personal_cryptography_store COMMENT = 'event sourcery personal cryptography store';
