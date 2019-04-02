@@ -17,15 +17,16 @@
   "require": {
     "php": "^7.2",
     "event-sourcery/event-sourcery": "^6",
-    "monolith/collections": "^3",
-    "monolith/component-bootstrapping": "^4",
-    "monolith/configuration": "^2",
-    "monolith/dependency-injection": "^5",
-    "monolith/relational-database": "^5",
+    "monolith/collections": "^5",
+    "monolith/component-bootstrapping": "^5",
+    "monolith/configuration": "^3",
+    "monolith/dependency-injection": "^6",
+    "monolith/relational-database": "^6",
     "psr/container": "1.0.0"
   },
   "require-dev": {
-    "ramsey/uuid": "^3"
+    "ramsey/uuid": "^3",
+    "phpspec/phpspec": "^4"
   },
   "autoload": {
     "psr-4": {

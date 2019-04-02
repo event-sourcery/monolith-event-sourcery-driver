@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS personal_cryptography_store;
 CREATE TABLE personal_cryptography_store
 (
     id int PRIMARY KEY AUTO_INCREMENT,
