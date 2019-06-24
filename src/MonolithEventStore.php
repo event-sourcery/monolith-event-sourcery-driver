@@ -82,7 +82,6 @@ class MonolithEventStore implements EventStore
     {
         return StreamEvents::make(
             $this->getStreamRawEventData($id)->map(function ($e) {
-
                 $e->event_data = json_decode($e->event_data, true);
 
                 return new StreamEvent(
@@ -126,12 +125,14 @@ class MonolithEventStore implements EventStore
      */
     private function getStreamRawEventData(StreamId $id): Collection
     {
-        return new Collection((array) $this->db->readAll(
-            "select * from {$this->table} where stream_id = :stream_id order by stream_version asc",
-            [
-                'stream_id' => $id->toString(),
-            ]
-        ));
+        return new Collection(
+            (array)$this->db->readAll(
+                "select * from {$this->table} where stream_id = :stream_id order by stream_version asc",
+                [
+                    'stream_id' => $id->toString(),
+                ]
+            )
+        );
     }
 
     /**
@@ -144,9 +145,11 @@ class MonolithEventStore implements EventStore
      */
     private function getRawEvents($take = 0, $skip = 0): Collection
     {
-        return new Collection($this->db->readAll(
-            "select * from {$this->table} order by id asc limit {$skip}, {$take}"
-        ));
+        return new Collection(
+            $this->db->readAll(
+                "select * from {$this->table} order by id asc limit {$skip}, {$take}"
+            )
+        );
     }
 
     /**
