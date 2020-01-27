@@ -1,5 +1,6 @@
 <?php namespace EventSourcery\Monolith;
 
+use Monolith\Configuration\Config;
 use EventSourcery\EventSourcery\Commands\CommandBus;
 use EventSourcery\EventSourcery\Commands\ReflectionResolutionCommandBus;
 use EventSourcery\EventSourcery\EventDispatch\EventDispatcher;
@@ -21,8 +22,13 @@ use Monolith\RelationalDatabase\CouldNotConnectWithPdo;
 
 class EventSourceryBootstrap implements ComponentBootstrap
 {
+    /** @var Config */
+    private $config;
+
     public function bind(Container $container): void
     {
+        $this->config = $container(Config::class);
+
         // CQRS
         $container->bind(CommandBus::class, function (callable $r) use ($container) {
             return new ReflectionResolutionCommandBus($container);
@@ -81,9 +87,9 @@ class EventSourceryBootstrap implements ComponentBootstrap
         $container->bind(EventStoreDb::class, function (callable $r) {
             try {
                 return new EventStoreDb(
-                    getenv('EVENT_STORE_DSN'),
-                    getenv('EVENT_STORE_USERNAME'),
-                    getenv('EVENT_STORE_PASSWORD')
+                    $this->config->get('EVENT_STORE_DSN'),
+                    $this->config->get('EVENT_STORE_USERNAME'),
+                    $this->config->get('EVENT_STORE_PASSWORD')
                 );
             } catch (CouldNotConnectWithPdo $e) {
                 throw CouldNotConnectToDatabase::fromPdoException($e);
@@ -93,9 +99,9 @@ class EventSourceryBootstrap implements ComponentBootstrap
         $container->bind(PersonalDataStoreDb::class, function (callable $r) {
             try {
                 return new PersonalDataStoreDb(
-                    getenv('PERSONAL_DATA_STORE_DSN'),
-                    getenv('PERSONAL_DATA_STORE_USERNAME'),
-                    getenv('PERSONAL_DATA_STORE_PASSWORD')
+                    $this->config->get('PERSONAL_DATA_STORE_DSN'),
+                    $this->config->get('PERSONAL_DATA_STORE_USERNAME'),
+                    $this->config->get('PERSONAL_DATA_STORE_PASSWORD')
                 );
             } catch (CouldNotConnectWithPdo $e) {
                 throw CouldNotConnectToDatabase::fromPdoException($e);
@@ -105,9 +111,9 @@ class EventSourceryBootstrap implements ComponentBootstrap
         $container->bind(PersonalCryptographyStoreDb::class, function (callable $r) {
             try {
                 return new PersonalCryptographyStoreDb(
-                    getenv('PERSONAL_CRYPTOGRAPHY_STORE_DSN'),
-                    getenv('PERSONAL_CRYPTOGRAPHY_STORE_USERNAME'),
-                    getenv('PERSONAL_CRYPTOGRAPHY_STORE_PASSWORD')
+                    $this->config->get('PERSONAL_CRYPTOGRAPHY_STORE_DSN'),
+                    $this->config->get('PERSONAL_CRYPTOGRAPHY_STORE_USERNAME'),
+                    $this->config->get('PERSONAL_CRYPTOGRAPHY_STORE_PASSWORD')
                 );
             } catch (CouldNotConnectWithPdo $e) {
                 throw CouldNotConnectToDatabase::fromPdoException($e);
