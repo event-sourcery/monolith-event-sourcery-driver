@@ -131,6 +131,10 @@ class MonolithEventStore implements EventStore
             ]
         );
         
+        if ( ! $row) {
+            throw new CanNotRetrieveDomainEvent('Failed to locate domain event with id ' . $id);
+        }
+
         return $this->serializer->deserialize(
             (array) json_decode($row->event_data, true)
         );

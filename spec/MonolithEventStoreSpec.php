@@ -1,5 +1,6 @@
 <?php namespace spec\EventSourcery\Monolith;
 
+use EventSourcery\Monolith\CanNotRetrieveDomainEvent;
 use EventSourcery\EventSourcery\EventDispatch\EventDispatcher;
 use EventSourcery\EventSourcery\EventSourcing\DomainEventClassMap;
 use EventSourcery\EventSourcery\EventSourcing\DomainEvents;
@@ -106,6 +107,19 @@ class MonolithEventStoreSpec extends ObjectBehavior
         $event->id->equals($id);
     }
 
+    function it_throws_when_it_cant_find_an_event_by_id()
+    {
+        /** @var StreamEvents $stream */
+
+        $id = IdStub::generate();
+
+        // store an event stub
+        $this->storeEvent(new DomainEventStub($id));
+
+        // query
+        $this->shouldThrow(CanNotRetrieveDomainEvent::class)->during('getEvent', [1190283719273]);
+    }
+    
     function it_can_store_event_streams()
     {
         $id = IdStub::generate();
