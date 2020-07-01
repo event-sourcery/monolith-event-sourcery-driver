@@ -90,7 +90,7 @@ if ($useExpect && ! function_exists('expect')) {
     }
 }
 
-function d(...$vars) {
+function dd(...$vars) {
     foreach ($vars as $var) {
         var_dump($var);
     }

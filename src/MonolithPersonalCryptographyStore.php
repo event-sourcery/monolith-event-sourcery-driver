@@ -35,7 +35,6 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      *
      * @param PersonalKey $person
      * @param CryptographicDetails $crypto
-     * @throws CanNotRetrieveCryptographyFromARemovedPerson
      * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
      * @throws CanNotAddCryptoPersonAlreadyHasCrypto
      */
@@ -92,7 +91,6 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
      * @return CryptographicDetails
      * @throws \EventSourcery\EventSourcery\PersonalData\CannotDeserializeCryptographicDetails
      * @throws \Monolith\RelationalDatabase\CanNotExecuteQuery
-     * @throws CanNotRetrieveCryptographyFromARemovedPerson
      * @throws CryptoCouldNotBeFoundForPerson
      * @throws CanNotRetrieveCryptoForARemovedPerson
      */
@@ -112,6 +110,7 @@ class MonolithPersonalCryptographyStore implements PersonalCryptographyStore
         if (empty($crypto->cryptographic_details)) {
             throw new CanNotRetrieveCryptoForARemovedPerson;
         }
+        
         $details = (array) json_decode($crypto->cryptographic_details);
         return CryptographicDetails::deserialize($details);
     }

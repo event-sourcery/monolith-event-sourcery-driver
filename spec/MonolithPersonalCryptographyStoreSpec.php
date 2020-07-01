@@ -23,7 +23,7 @@ class MonolithPersonalCryptographyStoreSpec extends ObjectBehavior
         $container = new Container;
         $loader = new ComponentLoader($container);
         $loader->register(
-            new ConfigurationBootstrap('spec/'),
+            new ConfigurationBootstrap('spec/.env'),
             new EventSourceryBootstrap
         );
         $loader->load();

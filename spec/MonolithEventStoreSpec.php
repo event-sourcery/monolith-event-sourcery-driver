@@ -24,7 +24,7 @@ class MonolithEventStoreSpec extends ObjectBehavior
         $container = new Container;
         $loader = new ComponentLoader($container);
         $loader->register(
-            new ConfigurationBootstrap('spec/'),
+            new ConfigurationBootstrap('spec/.env'),
             new EventSourceryBootstrap
         );
         $loader->load();
@@ -83,6 +83,25 @@ class MonolithEventStoreSpec extends ObjectBehavior
         $event = $events->first();
         $event->shouldHaveType(DomainEventStub::class);
 
+        // the id should be the same
+        $event->id->equals($id);
+    }
+    
+    function it_can_retrieve_events_by_id()
+    {
+        /** @var StreamEvents $stream */
+
+        $id = IdStub::generate();
+
+        // store an event stub
+        $this->storeEvent(new DomainEventStub($id));
+
+        // query
+        $event = $this->getEvent(1);
+
+        // get back domain events collection
+        $event->shouldHaveType(DomainEventStub::class);
+        
         // the id should be the same
         $event->id->equals($id);
     }

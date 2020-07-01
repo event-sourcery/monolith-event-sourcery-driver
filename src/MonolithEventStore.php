@@ -1,15 +1,15 @@
 <?php namespace EventSourcery\Monolith;
 
-use EventSourcery\EventSourcery\EventDispatch\EventDispatcher;
-use EventSourcery\EventSourcery\EventSourcing\DomainEvent;
-use EventSourcery\EventSourcery\EventSourcing\DomainEvents;
-use EventSourcery\EventSourcery\EventSourcing\EventStore;
-use EventSourcery\EventSourcery\EventSourcing\StreamEvent;
-use EventSourcery\EventSourcery\EventSourcing\StreamEvents;
-use EventSourcery\EventSourcery\EventSourcing\StreamId;
-use EventSourcery\EventSourcery\EventSourcing\StreamVersion;
-use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
 use Monolith\Collections\Collection;
+use EventSourcery\EventSourcery\EventSourcing\StreamId;
+use EventSourcery\EventSourcery\EventSourcing\EventStore;
+use EventSourcery\EventSourcery\EventSourcing\DomainEvent;
+use EventSourcery\EventSourcery\EventSourcing\StreamEvent;
+use EventSourcery\EventSourcery\EventSourcing\DomainEvents;
+use EventSourcery\EventSourcery\EventSourcing\StreamEvents;
+use EventSourcery\EventSourcery\EventSourcing\StreamVersion;
+use EventSourcery\EventSourcery\EventDispatch\EventDispatcher;
+use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
 
 /**
  * The MonolithEventStore is a Monolith-specific implementation of
@@ -45,9 +45,11 @@ class MonolithEventStore implements EventStore
     public function storeStream(StreamEvents $events): void
     {
         // store events
-        $events->each(function (StreamEvent $stream) {
-            $this->store($stream->id(), $stream->event(), $stream->version());
-        });
+        $events->each(
+            function (StreamEvent $stream) {
+                $this->store($stream->id(), $stream->event(), $stream->version());
+            }
+        );
 
         // event dispatch
         $this->eventDispatcher->dispatch($events->toDomainEvents());
@@ -81,16 +83,18 @@ class MonolithEventStore implements EventStore
     public function getStream(StreamId $id): StreamEvents
     {
         return StreamEvents::make(
-            $this->getStreamRawEventData($id)->map(function ($e) {
-                $e->event_data = json_decode($e->event_data, true);
+            $this->getStreamRawEventData($id)->map(
+                function ($e) {
+                    $e->event_data = json_decode($e->event_data, true);
 
-                return new StreamEvent(
-                    StreamId::fromString($e->stream_id),
-                    StreamVersion::fromInt($e->stream_version),
-                    $this->serializer->deserialize($e->event_data)
-                );
+                    return new StreamEvent(
+                        StreamId::fromString($e->stream_id),
+                        StreamVersion::fromInt($e->stream_version),
+                        $this->serializer->deserialize($e->event_data)
+                    );
 
-            })->toArray()
+                }
+            )->toArray()
         );
     }
 
@@ -107,13 +111,29 @@ class MonolithEventStore implements EventStore
     {
         $eventData = $this->getRawEvents($take, $skip);
 
-        $events = $eventData->map(function ($e) {
-            return $this->serializer->deserialize(
-                json_decode($e->event_data, true)
-            );
-        })->toArray();
+        $events = $eventData->map(
+            function ($e) {
+                return $this->serializer->deserialize(
+                    json_decode($e->event_data, true)
+                );
+            }
+        )->toArray();
 
         return DomainEvents::make($events);
+    }
+
+    public function getEvent($id): DomainEvent
+    {
+        $row = $this->db->readFirst(
+            "select * from {$this->table} where id = :id",
+            [
+                'id' => $id,
+            ]
+        );
+        
+        return $this->serializer->deserialize(
+            (array) json_decode($row->event_data, true)
+        );
     }
 
     /**
@@ -126,7 +146,7 @@ class MonolithEventStore implements EventStore
     private function getStreamRawEventData(StreamId $id): Collection
     {
         return new Collection(
-            (array)$this->db->readAll(
+            (array) $this->db->readAll(
                 "select * from {$this->table} where stream_id = :stream_id order by stream_version asc",
                 [
                     'stream_id' => $id->toString(),
@@ -166,12 +186,12 @@ class MonolithEventStore implements EventStore
         $this->db->write(
             "insert into {$this->table} (stream_id, stream_version, event_name, event_data, raised_at, meta_data) values(:stream_id, :stream_version, :event_name, :event_data, :raised_at, :meta_data)",
             [
-                'stream_id'      => $id->toString(),
+                'stream_id' => $id->toString(),
                 'stream_version' => $version->toInt(),
-                'event_name'     => $this->serializer->eventNameForClass(get_class($event)),
-                'event_data'     => $this->serializer->serialize($event),
-                'raised_at'      => date('Y-m-d H:i:s'),
-                'meta_data'      => $metadata ?: '{}',
+                'event_name' => $this->serializer->eventNameForClass(get_class($event)),
+                'event_data' => $this->serializer->serialize($event),
+                'raised_at' => date('Y-m-d H:i:s'),
+                'meta_data' => $metadata ?: '{}',
             ]
         );
     }
