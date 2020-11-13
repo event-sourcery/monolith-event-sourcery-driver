@@ -4,20 +4,72 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1987e9b14e63da7d2a134c7e865f9507",
+    "content-hash": "d2288b6483d5d2882a7937dfb9351248",
     "packages": [
         {
-            "name": "event-sourcery/event-sourcery",
-            "version": "7.4",
+            "name": "brick/math",
+            "version": "0.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/event-sourcery/event-sourcery.git",
-                "reference": "f5f8a1c7d885c4f4c4f62e25d7c42f17f77ebfee"
+                "url": "https://github.com/brick/math.git",
+                "reference": "283a40c901101e66de7061bd359252c013dcc43c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/f5f8a1c7d885c4f4c4f62e25d7c42f17f77ebfee",
-                "reference": "f5f8a1c7d885c4f4c4f62e25d7c42f17f77ebfee",
+                "url": "https://api.github.com/repos/brick/math/zipball/283a40c901101e66de7061bd359252c013dcc43c",
+                "reference": "283a40c901101e66de7061bd359252c013dcc43c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.2",
+                "phpunit/phpunit": "^7.5.15|^8.5",
+                "vimeo/psalm": "^3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Brick\\Math\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Arbitrary-precision arithmetic library",
+            "keywords": [
+                "Arbitrary-precision",
+                "BigInteger",
+                "BigRational",
+                "arithmetic",
+                "bigdecimal",
+                "bignum",
+                "brick",
+                "math"
+            ],
+            "funding": [
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/brick/math",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-08-18T23:57:15+00:00"
+        },
+        {
+            "name": "event-sourcery/event-sourcery",
+            "version": "7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/event-sourcery/event-sourcery.git",
+                "reference": "02f2d789bbc8e3328555314846c94f438ba6e807"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/02f2d789bbc8e3328555314846c94f438ba6e807",
+                "reference": "02f2d789bbc8e3328555314846c94f438ba6e807",
                 "shasum": ""
             },
             "require": {
@@ -25,7 +77,7 @@
                 "ext-sodium": "*",
                 "php": "^7.4",
                 "psr/container": "^1",
-                "ramsey/uuid": "^3"
+                "ramsey/uuid": ">=3"
             },
             "require-dev": {
                 "phpspec/phpspec": "dev-master"
@@ -56,11 +108,7 @@
                 "gdpr",
                 "reactive"
             ],
-            "support": {
-                "issues": "https://github.com/event-sourcery/event-sourcery/issues",
-                "source": "https://github.com/event-sourcery/event-sourcery/tree/7.4"
-            },
-            "time": "2020-10-20T12:33:05+00:00"
+            "time": "2020-11-12T14:39:50+00:00"
         },
         {
             "name": "filp/whoops",
@@ -129,23 +177,23 @@
         },
         {
             "name": "monolith/collections",
-            "version": "2.1",
+            "version": "8.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/monolith-php/collections.git",
-                "reference": "c9108757cc498eb4eb2e33e4a920dca4c724e758"
+                "url": "git@github.com:monolith-php/collections.git",
+                "reference": "f28a5f46bb5049c1ecb2821849c7d0409a5cc51d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/collections/zipball/c9108757cc498eb4eb2e33e4a920dca4c724e758",
-                "reference": "c9108757cc498eb4eb2e33e4a920dca4c724e758",
+                "url": "https://api.github.com/repos/monolith-php/collections/zipball/f28a5f46bb5049c1ecb2821849c7d0409a5cc51d",
+                "reference": "f28a5f46bb5049c1ecb2821849c7d0409a5cc51d",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1"
+                "php": "^7.4"
             },
             "require-dev": {
-                "phpspec/phpspec": "^5.0"
+                "phpspec/phpspec": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -153,15 +201,18 @@
                     "Monolith\\Collections\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "spec\\Monolith\\Collections\\": "spec/"
+                },
+                "files": [
+                    "spec/functions.php"
+                ]
+            },
             "authors": [
                 {
                     "name": "Shawn McCool",
                     "email": "shawn@heybigname.com"
-                },
-                {
-                    "name": "Mitchell van Wijngaarden",
-                    "email": "mitchell@kooding.nl"
                 }
             ],
             "description": "Collection classes for the Monolith framework.",
@@ -170,29 +221,32 @@
                 "monolith"
             ],
             "support": {
-                "issues": "https://github.com/monolith-php/collections/issues",
-                "source": "https://github.com/monolith-php/collections/tree/2.0"
+                "source": "https://github.com/monolith-php/collections/tree/8.6",
+                "issues": "https://github.com/monolith-php/collections/issues"
             },
-            "time": "2018-09-22T13:41:18+00:00"
+            "time": "2020-08-31T11:54:12+00:00"
         },
         {
             "name": "monolith/component-bootstrapping",
-            "version": "4.3",
+            "version": "7.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/monolith-php/component-bootstrapping.git",
-                "reference": "5cf850272db9ddb64dfb5b7680ea3296005c6174"
+                "url": "git@github.com:monolith-php/component-bootstrapping.git",
+                "reference": "7a5f6ee4e200b683afbed4c91220dc8d957f635d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/component-bootstrapping/zipball/5cf850272db9ddb64dfb5b7680ea3296005c6174",
-                "reference": "5cf850272db9ddb64dfb5b7680ea3296005c6174",
+                "url": "https://api.github.com/repos/monolith-php/component-bootstrapping/zipball/7a5f6ee4e200b683afbed4c91220dc8d957f635d",
+                "reference": "7a5f6ee4e200b683afbed4c91220dc8d957f635d",
                 "shasum": ""
             },
             "require": {
-                "monolith/collections": ">=2",
-                "monolith/dependency-injection": ">=4",
-                "php": "^7.1"
+                "monolith/collections": "^8",
+                "monolith/dependency-injection": "^8",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -200,7 +254,14 @@
                     "Monolith\\ComponentBootstrapping\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "spec\\Monolith\\ComponentBootstrapping\\": "spec/"
+                },
+                "files": [
+                    "spec/functions.php"
+                ]
+            },
             "authors": [
                 {
                     "name": "Shawn McCool",
@@ -213,32 +274,31 @@
                 "monolith"
             ],
             "support": {
-                "issues": "https://github.com/monolith-php/component-bootstrapping/issues",
-                "source": "https://github.com/monolith-php/component-bootstrapping/tree/4.3"
+                "source": "https://github.com/monolith-php/component-bootstrapping/tree/7.3",
+                "issues": "https://github.com/monolith-php/component-bootstrapping/issues"
             },
-            "time": "2018-09-26T10:04:59+00:00"
+            "time": "2020-06-23T18:42:53+00:00"
         },
         {
             "name": "monolith/configuration",
-            "version": "2.7",
+            "version": "6.10",
             "source": {
                 "type": "git",
-                "url": "https://github.com/monolith-php/configuration.git",
-                "reference": "3f965ba4d69919722bd66669820d0070e9d756fa"
+                "url": "git@github.com:monolith-php/configuration.git",
+                "reference": "e2e96080dbabc090944365aefaacad91db699b1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/configuration/zipball/3f965ba4d69919722bd66669820d0070e9d756fa",
-                "reference": "3f965ba4d69919722bd66669820d0070e9d756fa",
+                "url": "https://api.github.com/repos/monolith-php/configuration/zipball/e2e96080dbabc090944365aefaacad91db699b1d",
+                "reference": "e2e96080dbabc090944365aefaacad91db699b1d",
                 "shasum": ""
             },
             "require": {
-                "monolith/component-bootstrapping": "^4",
-                "php": "^7.1",
-                "vlucas/phpdotenv": "^2.5@dev"
+                "monolith/component-bootstrapping": "^7",
+                "php": "^7.4"
             },
             "require-dev": {
-                "phpspec/phpspec": "^5.0"
+                "phpunit/phpunit": "^8.3@dev"
             },
             "type": "library",
             "autoload": {
@@ -246,46 +306,49 @@
                     "Monolith\\Configuration\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "files": [
+                    "tests/functions.php"
+                ]
+            },
             "authors": [
                 {
                     "name": "Shawn McCool",
-                    "email": "shawn@heybigname.com"
+                    "email": "shawnmc@gmail.com"
                 }
             ],
             "description": "Configuration management module for the Monolith framework.",
-            "homepage": "https://www.getmonolith.com",
             "keywords": [
                 "http",
                 "monolith"
             ],
             "support": {
-                "issues": "https://github.com/monolith-php/configuration/issues",
-                "source": "https://github.com/monolith-php/configuration/tree/2.7"
+                "source": "https://github.com/monolith-php/configuration/tree/6.10",
+                "issues": "https://github.com/monolith-php/configuration/issues"
             },
-            "time": "2018-09-26T13:11:29+00:00"
+            "time": "2020-06-30T09:26:29+00:00"
         },
         {
             "name": "monolith/dependency-injection",
-            "version": "5.10",
+            "version": "8.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/monolith-php/dependency-injection.git",
-                "reference": "32f8e5ca333c8cf5852467da4d09b0329e3eb619"
+                "url": "git@github.com:monolith-php/dependency-injection.git",
+                "reference": "070e38265f3678fbfc7fdf02f850d70b56334e58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/dependency-injection/zipball/32f8e5ca333c8cf5852467da4d09b0329e3eb619",
-                "reference": "32f8e5ca333c8cf5852467da4d09b0329e3eb619",
+                "url": "https://api.github.com/repos/monolith-php/dependency-injection/zipball/070e38265f3678fbfc7fdf02f850d70b56334e58",
+                "reference": "070e38265f3678fbfc7fdf02f850d70b56334e58",
                 "shasum": ""
             },
             "require": {
-                "monolith/collections": "^2",
-                "php": "^7.1",
+                "monolith/collections": "^8",
+                "php": "^7.4",
                 "psr/container": "^1"
             },
             "require-dev": {
-                "phpspec/phpspec": "^5.0"
+                "phpspec/phpspec": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -293,7 +356,14 @@
                     "Monolith\\DependencyInjection\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "spec\\Monolith\\DependencyInjection\\": "spec/"
+                },
+                "files": [
+                    "spec/functions.php"
+                ]
+            },
             "authors": [
                 {
                     "name": "Shawn McCool",
@@ -301,39 +371,39 @@
                 }
             ],
             "description": "Dependency injection container for the Monolith framework.",
-            "homepage": "https://www.getmonolith.com",
             "keywords": [
                 "container",
                 "dependency injection",
                 "monolith"
             ],
             "support": {
-                "issues": "https://github.com/monolith-php/dependency-injection/issues",
-                "source": "https://github.com/monolith-php/dependency-injection/tree/5.10"
+                "source": "https://github.com/monolith-php/dependency-injection/tree/8.3",
+                "issues": "https://github.com/monolith-php/dependency-injection/issues"
             },
-            "time": "2018-10-01T09:17:06+00:00"
+            "time": "2020-06-23T18:43:07+00:00"
         },
         {
             "name": "monolith/error-handling",
-            "version": "2.3",
+            "version": "5.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/monolith-php/error-handling.git",
-                "reference": "aeaeb7900566d59d1459f3ffd9a7234a55242dba"
+                "url": "git@github.com:monolith-php/error-handling.git",
+                "reference": "ea5c4a5cc0fa81bba40d4d5a730394efcca10032"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/error-handling/zipball/aeaeb7900566d59d1459f3ffd9a7234a55242dba",
-                "reference": "aeaeb7900566d59d1459f3ffd9a7234a55242dba",
+                "url": "https://api.github.com/repos/monolith-php/error-handling/zipball/ea5c4a5cc0fa81bba40d4d5a730394efcca10032",
+                "reference": "ea5c4a5cc0fa81bba40d4d5a730394efcca10032",
                 "shasum": ""
             },
             "require": {
                 "filp/whoops": "^2.2@dev",
-                "monolith/component-bootstrapping": ">=4",
-                "php": "^7.1"
+                "monolith/component-bootstrapping": "^7",
+                "monolith/configuration": "^6",
+                "php": "^7.p"
             },
             "require-dev": {
-                "phpspec/phpspec": "^5.0"
+                "phpspec/phpspec": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -341,7 +411,14 @@
                     "Monolith\\ErrorHandling\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "spec\\Monolith\\ErrorHandling\\": "spec/"
+                },
+                "files": [
+                    "spec/functions.php"
+                ]
+            },
             "authors": [
                 {
                     "name": "Shawn McCool",
@@ -354,38 +431,39 @@
                 "monolith"
             ],
             "support": {
-                "issues": "https://github.com/monolith-php/error-handling/issues",
-                "source": "https://github.com/monolith-php/error-handling/tree/2.3"
+                "source": "https://github.com/monolith-php/error-handling/tree/5.3",
+                "issues": "https://github.com/monolith-php/error-handling/issues"
             },
-            "time": "2018-09-26T09:44:10+00:00"
+            "time": "2020-06-23T18:43:12+00:00"
         },
         {
             "name": "monolith/framework",
-            "version": "5.57",
+            "version": "5.108",
             "source": {
                 "type": "git",
-                "url": "https://github.com/monolith-php/framework.git",
-                "reference": "19166b248187bb6a7328b3f04719bc5980e9c6ca"
+                "url": "git@github.com:monolith-php/framework.git",
+                "reference": "2fe20e4a2b191841e408a7b0c0efc5f330eb863b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/framework/zipball/19166b248187bb6a7328b3f04719bc5980e9c6ca",
-                "reference": "19166b248187bb6a7328b3f04719bc5980e9c6ca",
+                "url": "https://api.github.com/repos/monolith-php/framework/zipball/2fe20e4a2b191841e408a7b0c0efc5f330eb863b",
+                "reference": "2fe20e4a2b191841e408a7b0c0efc5f330eb863b",
                 "shasum": ""
             },
             "require": {
-                "monolith/collections": "2.1",
-                "monolith/component-bootstrapping": "4.3",
-                "monolith/configuration": "2.7",
-                "monolith/dependency-injection": "5.10",
-                "monolith/error-handling": "2.3",
-                "monolith/http": "4.3",
-                "monolith/relational-database": "5.1",
-                "monolith/web-routing": "11.3",
-                "php": "^7.1"
+                "monolith/collections": "^8",
+                "monolith/component-bootstrapping": "^7",
+                "monolith/configuration": "^6",
+                "monolith/dependency-injection": "^8",
+                "monolith/error-handling": "^5",
+                "monolith/http": "^11",
+                "monolith/relational-database": "^7",
+                "monolith/twig-html-templating": "^5",
+                "monolith/web-routing": "^22",
+                "monolith/web-sessions": "^15",
+                "php": "^7.4"
             },
             "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "Shawn McCool",
@@ -398,31 +476,32 @@
                 "monolith"
             ],
             "support": {
-                "issues": "https://github.com/monolith-php/framework/issues",
-                "source": "https://github.com/monolith-php/framework/tree/5.57"
+                "source": "https://github.com/monolith-php/framework/tree/5.108",
+                "issues": "https://github.com/monolith-php/framework/issues"
             },
-            "time": "2018-10-01T09:41:18+00:00"
+            "time": "2020-06-23T18:36:22+00:00"
         },
         {
             "name": "monolith/http",
-            "version": "4.3",
+            "version": "11.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/monolith-php/http.git",
-                "reference": "afff331c6158a1304e5a9f14ef27bd4effe4345c"
+                "url": "git@github.com:monolith-php/http.git",
+                "reference": "f7aa677d8becffb85e0aeead947014f5cda06a1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/http/zipball/afff331c6158a1304e5a9f14ef27bd4effe4345c",
-                "reference": "afff331c6158a1304e5a9f14ef27bd4effe4345c",
+                "url": "https://api.github.com/repos/monolith-php/http/zipball/f7aa677d8becffb85e0aeead947014f5cda06a1e",
+                "reference": "f7aa677d8becffb85e0aeead947014f5cda06a1e",
                 "shasum": ""
             },
             "require": {
-                "monolith/collections": "^2",
-                "php": "^7.1"
+                "monolith/collections": "^8",
+                "monolith/component-bootstrapping": "^7",
+                "php": "^7.4"
             },
             "require-dev": {
-                "phpspec/phpspec": "^5.0"
+                "phpspec/phpspec": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -430,15 +509,19 @@
                     "Monolith\\Http\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "spec\\Monolith\\Http\\": "spec/"
+                },
+                "files": [
+                    "src/functions.php",
+                    "spec/spec-functions.php"
+                ]
+            },
             "authors": [
                 {
                     "name": "Shawn McCool",
                     "email": "shawn@heybigname.com"
-                },
-                {
-                    "name": "Mitchell van Wijngaarden",
-                    "email": "mitchell@kooding.nl"
                 }
             ],
             "description": "HTTP abstractions for the Monolith framework.",
@@ -447,32 +530,33 @@
                 "monolith"
             ],
             "support": {
-                "issues": "https://github.com/monolith-php/http/issues",
-                "source": "https://github.com/monolith-php/http/tree/4.3"
+                "source": "https://github.com/monolith-php/http/tree/11.6",
+                "issues": "https://github.com/monolith-php/http/issues"
             },
-            "time": "2018-09-26T11:25:25+00:00"
+            "time": "2020-06-23T18:43:15+00:00"
         },
         {
             "name": "monolith/relational-database",
-            "version": "5.1",
+            "version": "7.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/monolith-php/relational-database.git",
-                "reference": "071ff6908b36573437c181e4cb52741a2c07dcf0"
+                "url": "git@github.com:monolith-php/relational-database.git",
+                "reference": "53689af27ed0109cdda6da26f846eb1d9dc3098e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/relational-database/zipball/071ff6908b36573437c181e4cb52741a2c07dcf0",
-                "reference": "071ff6908b36573437c181e4cb52741a2c07dcf0",
+                "url": "https://api.github.com/repos/monolith-php/relational-database/zipball/53689af27ed0109cdda6da26f846eb1d9dc3098e",
+                "reference": "53689af27ed0109cdda6da26f846eb1d9dc3098e",
                 "shasum": ""
             },
             "require": {
-                "monolith/dependency-injection": "^5",
-                "php": "^7.1",
-                "vlucas/phpdotenv": "^2.5@dev"
+                "ext-pdo": "*",
+                "monolith/configuration": "^6",
+                "monolith/dependency-injection": "^8",
+                "php": "^7.4"
             },
             "require-dev": {
-                "phpspec/phpspec": "^5.0"
+                "phpspec/phpspec": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -480,7 +564,14 @@
                     "Monolith\\RelationalDatabase\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "spec\\Monolith\\RelationalDatabase\\": "spec/"
+                },
+                "files": [
+                    "spec/functions.php"
+                ]
+            },
             "authors": [
                 {
                     "name": "Shawn McCool",
@@ -493,33 +584,91 @@
                 "monolith"
             ],
             "support": {
-                "issues": "https://github.com/monolith-php/relational-database/issues",
-                "source": "https://github.com/monolith-php/relational-database/tree/5.1"
+                "source": "https://github.com/monolith-php/relational-database/tree/7.8",
+                "issues": "https://github.com/monolith-php/relational-database/issues"
             },
-            "time": "2018-10-01T09:40:55+00:00"
+            "time": "2020-07-10T10:43:09+00:00"
         },
         {
-            "name": "monolith/web-routing",
-            "version": "11.3",
+            "name": "monolith/twig-html-templating",
+            "version": "5.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/monolith-php/web-routing.git",
-                "reference": "c7d7878b2207bc720d66e610839ed3f20775ea53"
+                "url": "git@github.com:monolith-php/twig-html-templating.git",
+                "reference": "b3f9162c9def45a50728a248d5009402a98e9d0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolith-php/web-routing/zipball/c7d7878b2207bc720d66e610839ed3f20775ea53",
-                "reference": "c7d7878b2207bc720d66e610839ed3f20775ea53",
+                "url": "https://api.github.com/repos/monolith-php/twig-html-templating/zipball/b3f9162c9def45a50728a248d5009402a98e9d0c",
+                "reference": "b3f9162c9def45a50728a248d5009402a98e9d0c",
                 "shasum": ""
             },
             "require": {
-                "monolith/collections": "^2",
-                "monolith/dependency-injection": "^5",
-                "monolith/http": "^4",
-                "php": "^7.1"
+                "monolith/collections": ">=5",
+                "monolith/component-bootstrapping": ">=5",
+                "monolith/configuration": ">=3",
+                "monolith/dependency-injection": ">=6",
+                "php": "^7.4",
+                "twig/twig": "^2"
             },
             "require-dev": {
-                "phpspec/phpspec": "^5.0"
+                "phpspec/phpspec": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Monolith\\Twig\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "spec\\Monolith\\Twig\\": "spec/"
+                },
+                "files": [
+                    "spec/functions.php"
+                ]
+            },
+            "authors": [
+                {
+                    "name": "Shawn McCool",
+                    "email": "shawn@heybigname.com"
+                }
+            ],
+            "description": "Twig HTML templating component for the Monolith framework.",
+            "keywords": [
+                "html",
+                "monolith",
+                "templating",
+                "twig"
+            ],
+            "support": {
+                "source": "https://github.com/monolith-php/twig-html-templating/tree/5.4",
+                "issues": "https://github.com/monolith-php/twig-html-templating/issues"
+            },
+            "time": "2020-06-29T13:08:54+00:00"
+        },
+        {
+            "name": "monolith/web-routing",
+            "version": "22.3",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:monolith-php/web-routing.git",
+                "reference": "e0d33a93810a1e5a197bd492e567e0a22a4eab76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/monolith-php/web-routing/zipball/e0d33a93810a1e5a197bd492e567e0a22a4eab76",
+                "reference": "e0d33a93810a1e5a197bd492e567e0a22a4eab76",
+                "shasum": ""
+            },
+            "require": {
+                "monolith/collections": "^8",
+                "monolith/dependency-injection": "^8",
+                "monolith/http": "^11",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -527,7 +676,14 @@
                     "Monolith\\WebRouting\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "spec\\Monolith\\WebRouting\\": "spec/"
+                },
+                "files": [
+                    "spec/functions.php"
+                ]
+            },
             "authors": [
                 {
                     "name": "Shawn McCool",
@@ -541,60 +697,136 @@
                 "web routing"
             ],
             "support": {
-                "issues": "https://github.com/monolith-php/web-routing/issues",
-                "source": "https://github.com/monolith-php/web-routing/tree/11.3"
+                "source": "https://github.com/monolith-php/web-routing/tree/22.3",
+                "issues": "https://github.com/monolith-php/web-routing/issues"
             },
-            "time": "2018-10-01T09:29:23+00:00"
+            "time": "2020-06-23T18:43:34+00:00"
         },
         {
-            "name": "paragonie/random_compat",
-            "version": "v9.99.99",
+            "name": "monolith/web-sessions",
+            "version": "15.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95"
+                "url": "git@github.com:monolith-php/web-sessions.git",
+                "reference": "f4fa9c87b80574ea9fb8bfb2a16b9269d90b9fa9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95",
-                "reference": "84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95",
+                "url": "https://api.github.com/repos/monolith-php/web-sessions/zipball/f4fa9c87b80574ea9fb8bfb2a16b9269d90b9fa9",
+                "reference": "f4fa9c87b80574ea9fb8bfb2a16b9269d90b9fa9",
                 "shasum": ""
             },
             "require": {
-                "php": "^7"
+                "monolith/collections": "^8",
+                "monolith/component-bootstrapping": "^7",
+                "monolith/configuration": "^6",
+                "monolith/dependency-injection": "^8",
+                "monolith/http": "^11",
+                "monolith/web-routing": "^22",
+                "php": "^7.4",
+                "predis/predis": "^2.0@dev",
+                "ramsey/uuid": "^4"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*|5.*",
-                "vimeo/psalm": "^1"
-            },
-            "suggest": {
-                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+                "phpspec/phpspec": "dev-master"
             },
             "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Monolith\\WebSessions\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "spec\\Monolith\\WebSessions\\": "spec/"
+                },
+                "files": [
+                    "spec/functions.php"
+                ]
+            },
+            "authors": [
+                {
+                    "name": "Shawn McCool",
+                    "email": "shawn@heybigname.com"
+                }
+            ],
+            "description": "Web sessions component for the Monolith framework.",
+            "keywords": [
+                "monolith",
+                "sessions"
+            ],
+            "support": {
+                "source": "https://github.com/monolith-php/web-sessions/tree/15.5",
+                "issues": "https://github.com/monolith-php/web-sessions/issues"
+            },
+            "time": "2020-11-12T14:31:24+00:00"
+        },
+        {
+            "name": "predis/predis",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/predis/predis.git",
+                "reference": "338ba6d73d1293259953793a2c2b41e509b964c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/predis/predis/zipball/338ba6d73d1293259953793a2c2b41e509b964c1",
+                "reference": "338ba6d73d1293259953793a2c2b41e509b964c1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0 || ^9.0"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Paragon Initiative Enterprises",
-                    "email": "security@paragonie.com",
-                    "homepage": "https://paragonie.com"
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net",
+                    "role": "Creator & Maintainer"
+                },
+                {
+                    "name": "Till Krüss",
+                    "homepage": "https://till.im",
+                    "role": "Maintainer"
                 }
             ],
-            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "description": "A flexible and feature-complete Redis client for PHP.",
+            "homepage": "http://github.com/predis/predis",
             "keywords": [
-                "csprng",
-                "polyfill",
-                "pseudorandom",
-                "random"
+                "nosql",
+                "predis",
+                "redis"
             ],
-            "support": {
-                "email": "info@paragonie.com",
-                "issues": "https://github.com/paragonie/random_compat/issues",
-                "source": "https://github.com/paragonie/random_compat"
-            },
-            "time": "2018-07-02T15:55:56+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/tillkruss",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-09-27T02:08:13+00:00"
         },
         {
             "name": "psr/container",
@@ -643,10 +875,6 @@
                 "container-interop",
                 "psr"
             ],
-            "support": {
-                "issues": "https://github.com/php-fig/container/issues",
-                "source": "https://github.com/php-fig/container/tree/master"
-            },
             "time": "2017-02-14T16:28:37+00:00"
         },
         {
@@ -666,7 +894,6 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -701,54 +928,130 @@
             "time": "2020-09-18T06:44:51+00:00"
         },
         {
-            "name": "ramsey/uuid",
-            "version": "3.x-dev",
+            "name": "ramsey/collection",
+            "version": "1.2.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ramsey/uuid.git",
-                "reference": "7e1633a6964b48589b142d60542f9ed31bd37a92"
+                "url": "https://github.com/ramsey/collection.git",
+                "reference": "91e16d7de6e801d9e8e182388854ba69d7ce4134"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/7e1633a6964b48589b142d60542f9ed31bd37a92",
-                "reference": "7e1633a6964b48589b142d60542f9ed31bd37a92",
+                "url": "https://api.github.com/repos/ramsey/collection/zipball/91e16d7de6e801d9e8e182388854ba69d7ce4134",
+                "reference": "91e16d7de6e801d9e8e182388854ba69d7ce4134",
                 "shasum": ""
             },
             "require": {
+                "php": "^7.2 || ^8"
+            },
+            "require-dev": {
+                "captainhook/captainhook": "^5.3",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+                "ergebnis/composer-normalize": "^2.6",
+                "fzaninotto/faker": "^1.5",
+                "hamcrest/hamcrest-php": "^2",
+                "jangregor/phpstan-prophecy": "^0.6",
+                "mockery/mockery": "^1.3",
+                "phpstan/extension-installer": "^1",
+                "phpstan/phpstan": "^0.12.32",
+                "phpstan/phpstan-mockery": "^0.12.5",
+                "phpstan/phpstan-phpunit": "^0.12.11",
+                "phpunit/phpunit": "^8.5",
+                "psy/psysh": "^0.10.4",
+                "slevomat/coding-standard": "^6.3",
+                "squizlabs/php_codesniffer": "^3.5",
+                "vimeo/psalm": "^3.12.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ramsey\\Collection\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
+                }
+            ],
+            "description": "A PHP 7.2+ library for representing and manipulating collections.",
+            "keywords": [
+                "array",
+                "collection",
+                "hash",
+                "map",
+                "queue",
+                "set"
+            ],
+            "funding": [
+                {
+                    "url": "https://github.com/ramsey",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-09-10T21:03:04+00:00"
+        },
+        {
+            "name": "ramsey/uuid",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ramsey/uuid.git",
+                "reference": "e5b3699bbe04e18794a3b6e6e1e0443a9742e4ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/e5b3699bbe04e18794a3b6e6e1e0443a9742e4ad",
+                "reference": "e5b3699bbe04e18794a3b6e6e1e0443a9742e4ad",
+                "shasum": ""
+            },
+            "require": {
+                "brick/math": "^0.8 || ^0.9",
                 "ext-json": "*",
-                "paragonie/random_compat": "^1 | ^2 | 9.99.99",
-                "php": "^5.4 | ^7 | ^8",
+                "php": "^7.2 || ^8",
+                "ramsey/collection": "^1.0",
                 "symfony/polyfill-ctype": "^1.8"
             },
             "replace": {
                 "rhumsaa/uuid": "self.version"
             },
             "require-dev": {
-                "codeception/aspect-mock": "^1 | ^2",
-                "doctrine/annotations": "^1.2",
-                "goaop/framework": "1.0.0-alpha.2 | ^1 | ^2.1",
-                "jakub-onderka/php-parallel-lint": "^1",
-                "mockery/mockery": "^0.9.11 | ^1",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+                "doctrine/annotations": "^1.8",
+                "mockery/mockery": "^1.3",
                 "moontoast/math": "^1.1",
                 "paragonie/random-lib": "^2",
-                "php-mock/php-mock-phpunit": "^0.3 | ^1.1",
-                "phpunit/phpunit": "^4.8 | ^5.4 | ^6.5",
-                "squizlabs/php_codesniffer": "^3.5"
+                "php-mock/php-mock": "^2.2",
+                "php-mock/php-mock-mockery": "^1.3",
+                "php-parallel-lint/php-parallel-lint": "^1.1",
+                "phpbench/phpbench": "1.0.0-alpha2",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-mockery": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpunit/phpunit": "^8.5 || ^9",
+                "psy/psysh": "^0.10.0",
+                "slevomat/coding-standard": "^6.0",
+                "squizlabs/php_codesniffer": "^3.5",
+                "vimeo/psalm": "^3.18"
             },
             "suggest": {
-                "ext-ctype": "Provides support for PHP Ctype functions",
-                "ext-libsodium": "Provides the PECL libsodium extension for use with the SodiumRandomGenerator",
-                "ext-openssl": "Provides the OpenSSL extension for use with the OpenSslGenerator",
-                "ext-uuid": "Provides the PECL UUID extension for use with the PeclUuidTimeGenerator and PeclUuidRandomGenerator",
-                "moontoast/math": "Provides support for converting UUID to 128-bit integer (in string form).",
+                "ext-bcmath": "Enables faster math with arbitrary-precision integers using BCMath.",
+                "ext-ctype": "Enables faster processing of character classification using ctype functions.",
+                "ext-gmp": "Enables faster math with arbitrary-precision integers using GMP.",
+                "ext-uuid": "Enables the use of PeclUuidTimeGenerator and PeclUuidRandomGenerator.",
                 "paragonie/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
-                "ramsey/uuid-console": "A console application for generating UUIDs with ramsey/uuid",
                 "ramsey/uuid-doctrine": "Allows the use of Ramsey\\Uuid\\Uuid as Doctrine field type."
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.x-dev"
+                    "dev-master": "4.x-dev"
                 }
             },
             "autoload": {
@@ -763,35 +1066,24 @@
             "license": [
                 "MIT"
             ],
-            "authors": [
-                {
-                    "name": "Ben Ramsey",
-                    "email": "ben@benramsey.com",
-                    "homepage": "https://benramsey.com"
-                },
-                {
-                    "name": "Marijn Huizendveld",
-                    "email": "marijn.huizendveld@gmail.com"
-                },
-                {
-                    "name": "Thibaud Fabre",
-                    "email": "thibaud@aztech.io"
-                }
-            ],
-            "description": "Formerly rhumsaa/uuid. A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
+            "description": "A PHP library for generating and working with universally unique identifiers (UUIDs).",
             "homepage": "https://github.com/ramsey/uuid",
             "keywords": [
                 "guid",
                 "identifier",
                 "uuid"
             ],
-            "support": {
-                "issues": "https://github.com/ramsey/uuid/issues",
-                "rss": "https://github.com/ramsey/uuid/releases.atom",
-                "source": "https://github.com/ramsey/uuid",
-                "wiki": "https://github.com/ramsey/uuid/wiki"
-            },
-            "time": "2020-02-21T04:36:14+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/ramsey",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/ramsey/uuid",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-11-05T21:15:32+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -813,7 +1105,6 @@
             "suggest": {
                 "ext-ctype": "For best performance"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -874,41 +1165,120 @@
             "time": "2020-10-26T13:35:45+00:00"
         },
         {
-            "name": "vlucas/phpdotenv",
-            "version": "2.6.x-dev",
+            "name": "symfony/polyfill-mbstring",
+            "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "e1d57f62db3db00d9139078cbedf262280701479"
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "401c9d9d3400c53a8f1a39425f0543406c137a43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/e1d57f62db3db00d9139078cbedf262280701479",
-                "reference": "e1d57f62db3db00d9139078cbedf262280701479",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/401c9d9d3400c53a8f1a39425f0543406c137a43",
+                "reference": "401c9d9d3400c53a8f1a39425f0543406c137a43",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.9 || ^7.0 || ^8.0",
-                "symfony/polyfill-ctype": "^1.17"
-            },
-            "require-dev": {
-                "ext-filter": "*",
-                "ext-pcre": "*",
-                "phpunit/phpunit": "^4.8.35 || ^5.7.27"
+                "php": ">=7.1"
             },
             "suggest": {
-                "ext-filter": "Required to use the boolean validator.",
-                "ext-pcre": "Required to use most of the library."
+                "ext-mbstring": "For best performance"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-main": "1.21-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Dotenv\\": "src/"
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for the Mbstring extension",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "mbstring",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-10-26T13:35:45+00:00"
+        },
+        {
+            "name": "twig/twig",
+            "version": "2.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "e133d1fd8c9f22dd9bc43d1b7fc46e0f35692226"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/e133d1fd8c9f22dd9bc43d1b7fc46e0f35692226",
+                "reference": "e133d1fd8c9f22dd9bc43d1b7fc46e0f35692226",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-ctype": "^1.8",
+                "symfony/polyfill-mbstring": "^1.3"
+            },
+            "require-dev": {
+                "psr/container": "^1.0",
+                "symfony/phpunit-bridge": "^4.4.9|^5.0.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.14-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -917,37 +1287,37 @@
             ],
             "authors": [
                 {
-                    "name": "Graham Campbell",
-                    "email": "graham@alt-three.com",
-                    "homepage": "https://gjcampbell.co.uk/"
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
-                    "name": "Vance Lucas",
-                    "email": "vance@vancelucas.com",
-                    "homepage": "https://vancelucas.com/"
+                    "name": "Twig Team",
+                    "role": "Contributors"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
                 }
             ],
-            "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "https://twig.symfony.com",
             "keywords": [
-                "dotenv",
-                "env",
-                "environment"
+                "templating"
             ],
-            "support": {
-                "issues": "https://github.com/vlucas/phpdotenv/issues",
-                "source": "https://github.com/vlucas/phpdotenv/tree/2.6"
-            },
             "funding": [
                 {
-                    "url": "https://github.com/GrahamCampbell",
+                    "url": "https://github.com/fabpot",
                     "type": "github"
                 },
                 {
-                    "url": "https://tidelift.com/funding/github/packagist/vlucas/phpdotenv",
+                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-14T17:54:18+00:00"
+            "time": "2020-11-09T13:33:24+00:00"
         }
     ],
     "packages-dev": [
@@ -1037,7 +1407,6 @@
             "require": {
                 "php": ">=7.1"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1068,10 +1437,6 @@
                 "reflection",
                 "static analysis"
             ],
-            "support": {
-                "issues": "https://github.com/phpDocumentor/ReflectionCommon/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionCommon/tree/master"
-            },
             "time": "2020-06-19T17:42:03+00:00"
         },
         {
@@ -1098,7 +1463,6 @@
             "require-dev": {
                 "mockery/mockery": "~1.3.2"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1152,7 +1516,6 @@
             "require-dev": {
                 "ext-tokenizer": "*"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1260,7 +1623,6 @@
             "suggest": {
                 "phpspec/nyan-formatters": "Adds Nyan formatters"
             },
-            "default-branch": true,
             "bin": [
                 "bin/phpspec"
             ],
@@ -1305,10 +1667,6 @@
                 "testing",
                 "tests"
             ],
-            "support": {
-                "issues": "https://github.com/phpspec/phpspec/issues",
-                "source": "https://github.com/phpspec/phpspec/tree/main"
-            },
             "time": "2020-07-08T14:26:05+00:00"
         },
         {
@@ -1395,7 +1753,6 @@
             "require": {
                 "php": ">=7.2.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1450,7 +1807,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^9.3"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1524,7 +1880,6 @@
                 "phpunit/phpunit": "^9.3",
                 "symfony/process": "^4.2 || ^5"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1592,7 +1947,6 @@
                 "ext-mbstring": "*",
                 "phpunit/phpunit": "^9.3"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1668,7 +2022,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^9.3"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1759,7 +2112,6 @@
                 "symfony/lock": "",
                 "symfony/process": ""
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1827,7 +2179,6 @@
             "require": {
                 "php": ">=7.1"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-version": "2.3",
@@ -1920,7 +2271,6 @@
                 "symfony/dependency-injection": "",
                 "symfony/http-kernel": ""
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1986,7 +2336,6 @@
             "suggest": {
                 "symfony/event-dispatcher-implementation": ""
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-version": "2.3",
@@ -2063,7 +2412,6 @@
             "require": {
                 "php": ">=7.2.5"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -2128,7 +2476,6 @@
             "suggest": {
                 "ext-intl": "For best performance"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2210,7 +2557,6 @@
             "suggest": {
                 "ext-intl": "For best performance"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2276,87 +2622,6 @@
             "time": "2020-10-26T13:35:45+00:00"
         },
         {
-            "name": "symfony/polyfill-mbstring",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "401c9d9d3400c53a8f1a39425f0543406c137a43"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/401c9d9d3400c53a8f1a39425f0543406c137a43",
-                "reference": "401c9d9d3400c53a8f1a39425f0543406c137a43",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-            },
-            "suggest": {
-                "ext-mbstring": "For best performance"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.21-dev"
-                },
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill for the Mbstring extension",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "mbstring",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/main"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-10-26T13:35:45+00:00"
-        },
-        {
             "name": "symfony/polyfill-php73",
             "version": "dev-main",
             "source": {
@@ -2373,7 +2638,6 @@
             "require": {
                 "php": ">=7.1"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2453,7 +2717,6 @@
             "require": {
                 "php": ">=7.1"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2538,7 +2801,6 @@
                 "php": ">=7.2.5",
                 "symfony/polyfill-php80": "^1.15"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -2604,7 +2866,6 @@
             "suggest": {
                 "symfony/service-implementation": ""
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-version": "2.3",
@@ -2692,7 +2953,6 @@
                 "symfony/translation-contracts": "^1.1|^2",
                 "symfony/var-exporter": "^4.4|^5.0"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -2776,7 +3036,6 @@
             "suggest": {
                 "symfony/console": "For validating YAML files using the lint command"
             },
-            "default-branch": true,
             "bin": [
                 "Resources/bin/yaml-lint"
             ],
@@ -2871,10 +3130,6 @@
                 "check",
                 "validate"
             ],
-            "support": {
-                "issues": "https://github.com/webmozart/assert/issues",
-                "source": "https://github.com/webmozart/assert/tree/master"
-            },
             "time": "2020-07-08T17:02:28+00:00"
         }
     ],
@@ -2890,5 +3145,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }

@@ -18,6 +18,8 @@ use Ramsey\Uuid\Uuid;
 
 class MonolithPersonalCryptographyStoreSpec extends ObjectBehavior
 {
+    use MonolithEventStoreTestValues;
+    
     function bootstrapEventSourcery(): Container
     {
         $container = new Container;
@@ -46,15 +48,7 @@ class MonolithPersonalCryptographyStoreSpec extends ObjectBehavior
 
         $this->shouldHaveType(MonolithPersonalCryptographyStore::class);
 
-        // migrations
-        $db = $container->get(PersonalDataStoreDb::class);
-        $db->write(file_get_contents('migrations/create_personal_data_store.sql'));
-
-        $db = $container->get(PersonalCryptographyStoreDb::class);
-        $db->write(file_get_contents('migrations/create_personal_cryptography_store.sql'));
-
-        $db = $container->get(EventStoreDb::class);
-        $db->write(file_get_contents('migrations/create_event_store.sql'));
+        $this->migrate($container);
     }
 
     function it_is_initializable()

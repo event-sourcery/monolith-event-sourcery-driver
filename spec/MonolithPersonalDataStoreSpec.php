@@ -19,6 +19,8 @@ use PhpSpec\ObjectBehavior;
 
 class MonolithPersonalDataStoreSpec extends ObjectBehavior
 {
+    use MonolithEventStoreTestValues;
+    
     function bootstrapEventSourcery(): Container
     {
         $container = new Container;
@@ -44,15 +46,7 @@ class MonolithPersonalDataStoreSpec extends ObjectBehavior
             $this->container->get(PersonalDataStoreDb::class)
         );
 
-        /** @var PersonalCryptographyStoreDb $db */
-        $db = $this->container->get(PersonalDataStoreDb::class);
-        $db->write(file_get_contents('migrations/create_personal_data_store.sql'));
-
-        $db = $this->container->get(PersonalCryptographyStoreDb::class);
-        $db->write(file_get_contents('migrations/create_personal_cryptography_store.sql'));
-
-        $db = $this->container->get(EventStoreDb::class);
-        $db->write(file_get_contents('migrations/create_event_store.sql'));
+        $this->migrate($this->container);
     }
 
     function it_is_initializable()

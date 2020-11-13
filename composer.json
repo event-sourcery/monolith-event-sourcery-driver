@@ -1,46 +1,54 @@
 {
-  "name": "event-sourcery/monolith-event-sourcery-driver",
-  "description": "Monolith Driver for a Minimalistic PHP Event Sourcing / CQRS Library with GDPR Support.",
-  "keywords": [
-    "event sourcing",
-    "cqrs",
-    "monolith",
-    "event sourcery",
-    "gdpr"
-  ],
-  "authors": [
-    {
-      "name": "Shawn McCool",
-      "email": "shawn@heybigname.com"
-    }
-  ],
-  "require": {
-    "php": "^7.4",
-    "ext-json": "*",
-    "event-sourcery/event-sourcery": "^7",
-    "monolith/framework": "^5",
-    "psr/container": "1.0.0"
-  },
-  "require-dev": {
-    "ramsey/uuid": ">=3",
-    "phpspec/phpspec": "dev-master"
-  },
-  "autoload": {
-    "psr-4": {
-      "EventSourcery\\Monolith\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "spec\\EventSourcery\\Monolith\\": "spec/"
+    "name": "event-sourcery/monolith-event-sourcery-driver",
+    "description": "Monolith Driver for a Minimalistic PHP Event Sourcing / CQRS Library with GDPR Support.",
+    "keywords": [
+        "event sourcing",
+        "cqrs",
+        "monolith",
+        "event sourcery",
+        "gdpr"
+    ],
+    "authors": [
+        {
+            "name": "Shawn McCool",
+            "email": "shawn@mccool.email"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "ext-json": "*",
+        "event-sourcery/event-sourcery": "^7",
+        "monolith/framework": "^5",
+        "psr/container": "1.0.0"
     },
-    "files": [
-      "spec/functions.php"
-    ]
-  },
-  "config": {
-    "sort-packages": true,
-    "bin-dir": "bin"
-  },
-  "minimum-stability": "dev"
+    "require-dev": {
+        "ramsey/uuid": ">=3",
+        "phpspec/phpspec": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.humanmusic.eu",
+            "canonical": false,
+            "only": ["monolith/*"]
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "EventSourcery\\Monolith\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\EventSourcery\\Monolith\\": "spec/"
+        },
+        "files": [
+            "spec/functions.php"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "dev"
 }
