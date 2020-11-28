@@ -5,19 +5,12 @@
         "event sourcing",
         "cqrs",
         "monolith",
-        "event sourcery",
-        "gdpr"
-    ],
-    "authors": [
-        {
-            "name": "Shawn McCool",
-            "email": "shawn@mccool.email"
-        }
+        "event sourcery"
     ],
     "require": {
-        "php": "^7.4",
+        "php": ">=7.4",
         "ext-json": "*",
-        "event-sourcery/event-sourcery": "^7",
+        "event-sourcery/event-sourcery": ">=7",
         "monolith/framework": "^5",
         "psr/container": "1.0.0"
     },
