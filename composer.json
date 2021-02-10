@@ -8,15 +8,15 @@
         "event sourcery"
     ],
     "require": {
-        "php": ">=7.4",
+        "php": ">=8",
         "ext-json": "*",
         "event-sourcery/event-sourcery": ">=7",
-        "monolith/framework": "^5",
+        "monolith/framework": "^6",
         "psr/container": "1.0.0"
     },
     "require-dev": {
         "ramsey/uuid": ">=3",
-        "phpspec/phpspec": "dev-master"
+        "phpspec/phpspec": "^7"
     },
     "repositories": [
         {
